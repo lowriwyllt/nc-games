@@ -1,4 +1,3 @@
-import { useState } from "react";
 import MenuButton from "./MenuButton";
 import NavLinks from "./NavLinks";
 

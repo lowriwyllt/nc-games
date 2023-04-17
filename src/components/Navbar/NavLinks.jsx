@@ -15,8 +15,8 @@ function NavLinks({ activeNavbar, setActiveNavbar }) {
       <Link to="/" className="Navbar__Link">
         <p onClick={handleOnClick}>Home</p>
       </Link>
-      <Link to="/account" className="Navbar__Link">
-        <p onClick={handleOnClick}>Account</p>
+      <Link to="/reviews" className="Navbar__Link">
+        <p onClick={handleOnClick}>Reviews</p>
       </Link>
     </div>
   );

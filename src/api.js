@@ -15,11 +15,32 @@ export const fetchReviews = (category, sortBy, order, limit, page) => {
   if (category || sortBy || order || limit || page) {
     url += "?";
     let count = 0;
-    addQuery("category", category, count);
-    addQuery("sort_by", sortBy, count);
-    addQuery("order", order, count);
-    addQuery("limit", limit, count);
-    addQuery("p", page, count);
+
+    if (category) {
+      if (count > 0) url += "&";
+      url += `${"category"}=${category}`;
+      count++;
+    }
+    if (sortBy) {
+      if (count > 0) url += "&";
+      url += `${"sort_by"}=${sortBy}`;
+      count++;
+    }
+    if (order) {
+      if (count > 0) url += "&";
+      url += `${"order"}=${order}`;
+      count++;
+    }
+    if (limit) {
+      if (count > 0) url += "&";
+      url += `${"limit"}=${limit}`;
+      count++;
+    }
+    if (page) {
+      if (count > 0) url += "&";
+      url += `${"p"}=${page}`;
+      count++;
+    }
   }
-  return gamesApi.get(url).then(({ data }) => data.categories);
+  return gamesApi.get(url).then(({ data }) => data.reviews);
 };

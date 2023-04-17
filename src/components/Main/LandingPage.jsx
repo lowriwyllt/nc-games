@@ -9,7 +9,7 @@ const LandingPage = ({ setActiveNavbar }) => {
     if (event.nativeEvent.data.toLowerCase() === "y") {
       setContinueValue("... yes");
       setTimeout(() => {
-        navigate("/games");
+        navigate("/reviews");
       }, 750);
       setActiveNavbar(false);
     } else if (event.nativeEvent.data.toLowerCase() === "n") {
