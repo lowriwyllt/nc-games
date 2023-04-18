@@ -48,7 +48,7 @@ const ReviewCard = ({ review, space, currentUser }) => {
         onClick={votesHandleOnClick}
         disabled={addedVotes === 1}
       >
-        <div class="pixelized--heart"></div>
+        <div className="pixelized--heart"></div>
       </button>
       {err ? <p>{err}</p> : null}
 

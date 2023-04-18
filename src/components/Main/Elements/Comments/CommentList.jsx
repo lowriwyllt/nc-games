@@ -67,6 +67,14 @@ const CommentList = ({ reviewId, currentUser, space }) => {
 
   return (
     <div>
+      <MyModal
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+        contentLabel={"Comment Modal"}
+        Content={() => {
+          return <p>Your comment has been submitted!</p>;
+        }}
+      />
       {isLoading ? (
         <p>Loading...</p>
       ) : comments.length === 0 ? (
@@ -95,14 +103,6 @@ const CommentList = ({ reviewId, currentUser, space }) => {
             <br />
             {err ? <p>{err}</p> : null}
             <button disabled={disabledSubmit}>Submit</button>
-            <MyModal
-              modalIsOpen={modalIsOpen}
-              setIsOpen={setIsOpen}
-              contentLabel={"Comment Modal"}
-              Content={() => {
-                return <p>Your comment has been submitted!</p>;
-              }}
-            />
           </form>
         ) : null
       ) : (

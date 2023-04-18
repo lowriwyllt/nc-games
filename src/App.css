@@ -180,6 +180,7 @@ button {
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
+  font-size: max(1.6vw, 16px);
 }
 
 button:hover {
@@ -245,9 +246,13 @@ textarea {
 
 .modal {
   background-color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   color: white;
   width: min(90%, 300px);
-  margin: 100px auto;
+  margin: auto;
   text-align: center;
   padding: 10px;
   border: 8px double var(--brightBlue);
