@@ -225,3 +225,11 @@ button:disabled {
     justify-content: center;
   }
 }
+
+.commentCard {
+  width: 90%;
+  border: 8px double #00a1d6;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+}

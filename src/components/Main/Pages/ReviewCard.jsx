@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ReviewCard = ({ review, space }) => {
   const [err, setErr] = useState(null);
   const [addedVotes, setAddedVotes] = useState(0);
-  const [comments, setComments] = useState(false);
+  const [isComments, setIsComments] = useState(false);
 
   const votesHandleOnClick = (event) => {
     setAddedVotes(1);
@@ -18,7 +18,7 @@ const ReviewCard = ({ review, space }) => {
   };
 
   const commentHandleOnClick = (event) => {
-    setComments(!comments);
+    setIsComments(!isComments);
   };
 
   const date = new Date(review.created_at).toLocaleString();
@@ -42,7 +42,7 @@ const ReviewCard = ({ review, space }) => {
       </button>
       {err ? <p>{err}</p> : null}
       <button onClick={commentHandleOnClick}>Comments</button>
-      {comments ? <CommentList /> : null}
+      {isComments ? <CommentList reviewId={review.review_id} /> : null}
     </div>
   );
 };
