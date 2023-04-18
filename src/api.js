@@ -42,5 +42,9 @@ export const fetchReviews = (category, sortBy, order, limit, page) => {
       count++;
     }
   }
-  return gamesApi.get(url).then(({ data }) => data.reviews);
+  return gamesApi.get(url).then(({ data }) => data);
+};
+
+export const patchReviewVotes = (reviewId) => {
+  return gamesApi.patch(`/reviews/${reviewId}`, { inc_votes: 1 });
 };
