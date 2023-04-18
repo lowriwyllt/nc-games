@@ -1,7 +1,7 @@
 import * as api from "../../../api";
 import { useEffect, useState } from "react";
-import Header from "./Header";
-import ReviewCard from "./ReviewCard";
+import Header from "../Elements/General/Header";
+import ReviewCard from "../Elements/Reviews/ReviewCard";
 import { Link, useParams } from "react-router-dom";
 
 const SingleReview = ({

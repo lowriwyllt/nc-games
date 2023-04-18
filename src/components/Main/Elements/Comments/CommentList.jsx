@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import * as api from "../../../api";
+import * as api from "../../../../api";
 import CommentCard from "./CommentCard";
 import { Link } from "react-router-dom";
-import CommentModal from "./CommentModal";
+import CommentModal from "../CommentModal";
 
 const CommentList = ({ reviewId, currentUser, space }) => {
   const [comments, setComments] = useState([]);

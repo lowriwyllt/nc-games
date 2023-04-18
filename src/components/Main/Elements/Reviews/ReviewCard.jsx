@@ -1,6 +1,6 @@
 import { useState } from "react";
-import * as api from "../../../api";
-import CommentList from "./CommentList";
+import * as api from "../../../../api";
+import CommentList from "../Comments/CommentList";
 import { Link } from "react-router-dom";
 
 const ReviewCard = ({ review, space, currentUser }) => {
@@ -37,8 +37,15 @@ const ReviewCard = ({ review, space, currentUser }) => {
       <p>
         Votes: {review.votes + addedVotes} Comments: {review.comment_count}
       </p>
-      <button onClick={votesHandleOnClick} disabled={addedVotes === 1}>
+      {/* <button onClick={votesHandleOnClick} disabled={addedVotes === 1}>
         Votes
+      </button> */}
+      <button
+        className="pixel-block"
+        onClick={votesHandleOnClick}
+        disabled={addedVotes === 1}
+      >
+        <div class="pixelized--heart"></div>
       </button>
       {err ? <p>{err}</p> : null}
       <button onClick={commentHandleOnClick}>Comments</button>

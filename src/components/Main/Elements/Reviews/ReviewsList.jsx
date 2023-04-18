@@ -1,7 +1,7 @@
-import * as api from "../../../api";
+import * as api from "../../../../api";
 import { useEffect, useState } from "react";
-import ReviewCard from "./ReviewCard";
 import { useNavigate } from "react-router-dom";
+import ReviewCard from "./ReviewCard";
 
 const ReviewsList = ({
   categories,

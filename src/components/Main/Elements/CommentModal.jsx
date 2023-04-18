@@ -11,7 +11,6 @@ function CommentModal({ modalIsOpen, setIsOpen }) {
   return (
     <Modal
       isOpen={modalIsOpen}
-      onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       contentLabel="Example Modal"
       className="submittedAPost"

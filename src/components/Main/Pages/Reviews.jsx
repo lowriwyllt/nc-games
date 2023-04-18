@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Header from "./Header";
-import ReviewsList from "./ReviewsList";
 import { useParams } from "react-router-dom";
+import Header from "../Elements/General/Header";
+import ReviewsList from "../Elements/Reviews/ReviewsList";
 
 const Reviews = ({
   setActiveNavbar,

@@ -268,3 +268,49 @@ textarea {
   font-size: large;
   padding: auto;
 }
+
+.pixel-block {
+  width: 60px;
+  height: 50px;
+}
+
+.pixel-block:disabled .pixelized--heart,
+.pixel-block:disabled:hover .pixelized--heart {
+  box-shadow: 10px 0px white, 15px 0px white, 25px 0px white, 30px 0px white,
+    5px 5px white, 10px 5px red, 15px 5px red, 20px 5px white, 25px 5px red,
+    30px 5px red, 35px 5px white, 0px 10px white, 5px 10px red, 10px 10px red,
+    15px 10px red, 20px 10px red, 25px 10px red, 30px 10px red, 35px 10px red,
+    40px 10px white, 0px 15px white, 5px 15px red, 10px 15px red, 15px 15px red,
+    20px 15px red, 25px 15px red, 30px 15px red, 35px 15px red, 40px 15px white,
+    5px 20px white, 10px 20px red, 15px 20px red, 20px 20px red, 25px 20px red,
+    30px 20px red, 35px 20px white, 10px 25px white, 15px 25px red,
+    20px 25px red, 25px 25px red, 30px 25px white, 15px 30px white,
+    20px 30px red, 25px 30px white, 20px 35px white;
+}
+
+.pixel-block:hover .pixelized--heart {
+  box-shadow: 10px 0px white, 15px 0px white, 25px 0px white, 30px 0px white,
+    5px 5px white, 10px 5px grey, 15px 5px grey, 20px 5px white, 25px 5px grey,
+    30px 5px grey, 35px 5px white, 0px 10px white, 5px 10px grey, 10px 10px grey,
+    15px 10px grey, 20px 10px grey, 25px 10px grey, 30px 10px grey,
+    35px 10px grey, 40px 10px white, 0px 15px white, 5px 15px grey,
+    10px 15px grey, 15px 15px grey, 20px 15px grey, 25px 15px grey,
+    30px 15px grey, 35px 15px grey, 40px 15px white, 5px 20px white,
+    10px 20px grey, 15px 20px grey, 20px 20px grey, 25px 20px grey,
+    30px 20px grey, 35px 20px white, 10px 25px white, 15px 25px grey,
+    20px 25px grey, 25px 25px grey, 30px 25px white, 15px 30px white,
+    20px 30px grey, 25px 30px white, 20px 35px white;
+}
+
+.pixelized--heart {
+  margin-top: -20px;
+  display: block;
+  background-color: none;
+  width: 5px;
+  height: 5px;
+  box-shadow: 10px 0px white, 15px 0px white, 25px 0px white, 30px 0px white,
+    5px 5px white, 20px 5px white, 35px 5px white, 0px 10px white,
+    40px 10px white, 0px 15px white, 40px 15px white, 5px 20px white,
+    35px 20px white, 10px 25px white, 30px 25px white, 15px 30px white,
+    25px 30px white, 20px 35px white;
+}

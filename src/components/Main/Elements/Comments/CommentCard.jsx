@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as api from "../../../api";
+import * as api from "../../../../api";
 
 const CommentCard = ({ comment }) => {
   const [addedVotes, setAddedVotes] = useState(0);
@@ -23,8 +23,12 @@ const CommentCard = ({ comment }) => {
       <br />
       <p>{comment.body}</p>
       <p>Votes: {comment.votes + addedVotes}</p>
-      <button onClick={votesHandleOnClick} disabled={addedVotes === 1}>
-        Votes
+      <button
+        className="pixel-block"
+        onClick={votesHandleOnClick}
+        disabled={addedVotes === 1}
+      >
+        <div class="pixelized--heart"></div>
       </button>
     </div>
   );
