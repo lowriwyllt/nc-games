@@ -52,3 +52,14 @@ export const fetchReview = (reviewId) => {
 export const patchReviewVotes = (reviewId) => {
   return gamesApi.patch(`/reviews/${reviewId}`, { inc_votes: 1 });
 };
+
+//Comments
+export const fetchCommentOfReview = (reviewId) => {
+  return gamesApi
+    .get(`/reviews/${reviewId}/comments`)
+    .then(({ data }) => data.comments);
+};
+
+export const patchCommentVotes = (commentId) => {
+  return gamesApi.patch(`/comments/${commentId}`, { inc_votes: 1 });
+};
