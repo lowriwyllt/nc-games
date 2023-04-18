@@ -40,7 +40,10 @@ function App() {
             />
           }
         />
-        <Route path="/reviews/:reviewId" element={<SingleReview />} />
+        <Route
+          path="/reviews/:reviewId"
+          element={<SingleReview setActiveNavbar={setActiveNavbar} />}
+        />
         <Route
           path="/categories/:category_slug/reviews"
           element={
