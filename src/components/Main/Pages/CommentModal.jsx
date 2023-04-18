@@ -1,16 +1,9 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import Modal from "react-modal";
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
 
 function CommentModal({ modalIsOpen, setIsOpen }) {
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // subtitle.style.color = "#000";
-  }
-
   function closeModal() {
     setIsOpen(false);
   }
