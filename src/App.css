@@ -186,11 +186,16 @@ button {
 }
 
 .reviewCard {
+  color: white;
   width: 90%;
   border: 8px double #00a1d6;
   border-radius: 15px;
   padding: 10px;
   margin: 10px;
+}
+
+.reviewCard:hover {
+  border: 8px double #00ff00;
 }
 
 @media only screen and (min-width: 768px) {

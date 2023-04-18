@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as api from "../../../api";
 import CommentList from "./CommentList";
+import { Link } from "react-router-dom";
 
 const ReviewCard = ({ review }) => {
   const [err, setErr] = useState(null);
@@ -23,7 +24,7 @@ const ReviewCard = ({ review }) => {
   const date = new Date(review.created_at).toLocaleString();
 
   return (
-    <div className="reviewCard">
+    <Link to={`/reviews/${review.review_id}`} className="reviewCard">
       <h3>{review.title}</h3>
       <img src={review.review_img_url} alt={review.title} />
       <p>
@@ -37,7 +38,7 @@ const ReviewCard = ({ review }) => {
       <button onClick={commentHandleOnClick}>Comments</button>
 
       {comments ? <CommentList /> : null}
-    </div>
+    </Link>
   );
 };
 
