@@ -11,8 +11,8 @@ import SingleReview from "./components/Main/Pages/SingleReview";
 function App() {
   const [activeNavbar, setActiveNavbar] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState("dav3rid"); //This is hardcoded for now
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
 
   let appClass = "App";
   if (activeNavbar) {

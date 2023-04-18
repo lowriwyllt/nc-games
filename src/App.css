@@ -238,3 +238,14 @@ button:disabled {
   padding: 10px;
   margin: 10px;
 }
+
+textarea {
+  display: block;
+  width: 95%;
+  height: max(100px);
+  margin: 5px auto;
+  padding: 5px;
+  caret-color: var(--brightGreen);
+  background-color: black;
+  color: white;
+}

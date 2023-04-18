@@ -63,3 +63,9 @@ export const fetchCommentOfReview = (reviewId) => {
 export const patchCommentVotes = (commentId) => {
   return gamesApi.patch(`/comments/${commentId}`, { inc_votes: 1 });
 };
+
+export const postCommentOfReview = (reviewId, commentToBePosted) => {
+  return gamesApi
+    .post(`/reviews/${reviewId}/comments`, commentToBePosted)
+    .then(({ data }) => data.comment);
+};
