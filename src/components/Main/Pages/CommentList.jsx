@@ -10,7 +10,7 @@ const CommentList = ({ reviewId, currentUser }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    api.fetchCommentOfReview(reviewId).then((data) => {
+    api.fetchCommentOnReview(reviewId).then((data) => {
       setComments(data);
       setIsLoading(false);
     });
@@ -34,14 +34,18 @@ const CommentList = ({ reviewId, currentUser }) => {
       username: currentUser,
       body: event.target.commentBody.value,
     };
-    api
-      .postCommentOfReview(reviewId, requestObj)
-      .then((data) => {
-        setComments([...comments, data]);
-      })
-      .catch(() => {
-        setErr("something went wrong, try again later");
-      });
+    if (!requestObj.body) {
+      setErr("Can't post an empty comment!");
+    } else {
+      api
+        .postCommentOfReview(reviewId, requestObj)
+        .then((data) => {
+          setComments([...comments, data]);
+        })
+        .catch(() => {
+          setErr("something went wrong, try again later");
+        });
+    }
   };
 
   return (

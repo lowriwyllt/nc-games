@@ -54,7 +54,7 @@ export const patchReviewVotes = (reviewId) => {
 };
 
 //Comments
-export const fetchCommentOfReview = (reviewId) => {
+export const fetchCommentOnReview = (reviewId) => {
   return gamesApi
     .get(`/reviews/${reviewId}/comments`)
     .then(({ data }) => data.comments);
