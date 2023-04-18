@@ -10,6 +10,8 @@ const CommentList = ({ reviewId, currentUser, space }) => {
   const [commentBody, setCommentBody] = useState("Comment...");
   const [err, setErr] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [disabledForm, setDisabledForm] = useState(false);
+  const [disabledSubmit, setdisabledSubmit] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,6 +39,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
   };
 
   const handleOnSubmit = (event) => {
+    setdisabledSubmit(true);
     setCommentBody("");
     event.preventDefault();
     setErr(null);
@@ -46,15 +49,18 @@ const CommentList = ({ reviewId, currentUser, space }) => {
     };
     if (!requestObj.body) {
       setErr("Can't post an empty comment!");
+      setdisabledSubmit(false);
     } else {
       api
         .postCommentOfReview(reviewId, requestObj)
         .then((data) => {
           setComments([...comments, data]);
           setIsOpen(true);
+          setDisabledForm(true);
         })
         .catch(() => {
           setErr("something went wrong, try again later");
+          setdisabledSubmit(false);
         });
     }
   };
@@ -73,22 +79,24 @@ const CommentList = ({ reviewId, currentUser, space }) => {
         </div>
       )}
       {space === "single" ? (
-        <form className="commentCard" onSubmit={handleOnSubmit}>
-          <p>{currentUser}</p>
-          <br />
-          <label htmlFor="commentBody">New comment...</label>
-          <br />
-          <textarea
-            id="commentBody"
-            name="commentBody"
-            value={commentBody}
-            onClick={handleOnClick}
-            onChange={handleOnChange}
-          />
-          <br />
-          {err ? <p>{err}</p> : null}
-          <button>Submit</button>
-        </form>
+        !disabledForm ? (
+          <form className="commentCard" onSubmit={handleOnSubmit}>
+            <p>{currentUser}</p>
+            <br />
+            <label htmlFor="commentBody">New comment...</label>
+            <br />
+            <textarea
+              id="commentBody"
+              name="commentBody"
+              value={commentBody}
+              onClick={handleOnClick}
+              onChange={handleOnChange}
+            />
+            <br />
+            {err ? <p>{err}</p> : null}
+            <button disabled={disabledSubmit}>Submit</button>
+          </form>
+        ) : null
       ) : (
         <Link to={`/reviews/${reviewId}`} className="green">
           See all comments...
