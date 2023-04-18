@@ -9,6 +9,7 @@ const Reviews = ({
   setCategories,
   isLoading,
   setIsLoading,
+  currentUser,
 }) => {
   const [queries, setQueries] = useState({});
   const { category_slug } = useParams();
@@ -22,6 +23,7 @@ const Reviews = ({
       <Header setActiveNavbar={setActiveNavbar} />
       <h2>Reviews</h2>
       <ReviewsList
+        currentUser={currentUser}
         queries={queries}
         setQueries={setQueries}
         isLoading={isLoading}

@@ -12,6 +12,7 @@ function App() {
   const [activeNavbar, setActiveNavbar] = useState(false);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState("dav3rid"); //This is hardcoded for now
 
   let appClass = "App";
   if (activeNavbar) {
@@ -37,6 +38,7 @@ function App() {
               setActiveNavbar={setActiveNavbar}
               categories={categories}
               setCategories={setCategories}
+              currentUser={currentUser}
             />
           }
         />
@@ -47,6 +49,7 @@ function App() {
               isLoading={isLoading}
               setIsLoading={setIsLoading}
               setActiveNavbar={setActiveNavbar}
+              currentUser={currentUser}
             />
           }
         />
@@ -59,6 +62,7 @@ function App() {
               setActiveNavbar={setActiveNavbar}
               categories={categories}
               setCategories={setCategories}
+              currentUser={currentUser}
             />
           }
         />

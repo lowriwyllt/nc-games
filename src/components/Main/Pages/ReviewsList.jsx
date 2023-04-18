@@ -10,6 +10,7 @@ const ReviewsList = ({
   setIsLoading,
   setQueries,
   queries,
+  currentUser,
 }) => {
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -98,6 +99,7 @@ const ReviewsList = ({
                   key={review.review_id}
                   review={review}
                   space={"list"}
+                  currentUser={currentUser}
                 />
               );
             })}

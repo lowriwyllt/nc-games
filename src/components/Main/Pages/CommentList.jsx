@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as api from "../../../api";
 import CommentCard from "./CommentCard";
 
-const CommentList = ({ reviewId }) => {
+const CommentList = ({ reviewId, currentUser }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,6 +26,12 @@ const CommentList = ({ reviewId }) => {
           })}
         </div>
       )}
+      <form className="commentCard">
+        <p>{currentUser}</p>
+        <label>New comment...</label>
+        <textarea />
+        <button>Submit</button>
+      </form>
     </div>
   );
 };

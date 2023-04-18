@@ -3,7 +3,7 @@ import * as api from "../../../api";
 import CommentList from "./CommentList";
 import { Link } from "react-router-dom";
 
-const ReviewCard = ({ review, space }) => {
+const ReviewCard = ({ review, space, currentUser }) => {
   const [err, setErr] = useState(null);
   const [addedVotes, setAddedVotes] = useState(0);
   const [isComments, setIsComments] = useState(false);
@@ -42,7 +42,9 @@ const ReviewCard = ({ review, space }) => {
       </button>
       {err ? <p>{err}</p> : null}
       <button onClick={commentHandleOnClick}>Comments</button>
-      {isComments ? <CommentList reviewId={review.review_id} /> : null}
+      {isComments ? (
+        <CommentList reviewId={review.review_id} currentUser={currentUser} />
+      ) : null}
     </div>
   );
 };
