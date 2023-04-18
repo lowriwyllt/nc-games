@@ -2,11 +2,13 @@ import { useState } from "react";
 import * as api from "../../../../api";
 import CommentList from "../Comments/CommentList";
 import { Link } from "react-router-dom";
+import MyModal from "../General/Modal";
 
 const ReviewCard = ({ review, space, currentUser }) => {
   const [err, setErr] = useState(null);
   const [addedVotes, setAddedVotes] = useState(0);
   const [isComments, setIsComments] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   const votesHandleOnClick = (event) => {
     setAddedVotes(1);
@@ -17,7 +19,11 @@ const ReviewCard = ({ review, space, currentUser }) => {
     });
   };
 
-  const commentHandleOnClick = (event) => {
+  const commentHandleOnClickSingle = (event) => {
+    setIsOpen(true);
+  };
+
+  const commentHandleOnClickList = () => {
     setIsComments(!isComments);
   };
 
@@ -37,9 +43,6 @@ const ReviewCard = ({ review, space, currentUser }) => {
       <p>
         Votes: {review.votes + addedVotes} Comments: {review.comment_count}
       </p>
-      {/* <button onClick={votesHandleOnClick} disabled={addedVotes === 1}>
-        Votes
-      </button> */}
       <button
         className="pixel-block"
         onClick={votesHandleOnClick}
@@ -48,14 +51,38 @@ const ReviewCard = ({ review, space, currentUser }) => {
         <div class="pixelized--heart"></div>
       </button>
       {err ? <p>{err}</p> : null}
-      <button onClick={commentHandleOnClick}>Comments</button>
-      {isComments ? (
-        <CommentList
-          reviewId={review.review_id}
-          currentUser={currentUser}
-          space={space}
-        />
-      ) : null}
+
+      {space === "list" ? (
+        <div>
+          <button onClick={commentHandleOnClickSingle}>Comments</button>
+          <MyModal
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+            contentLabel={"Comment Modal"}
+            Content={() => {
+              return (
+                <CommentList
+                  reviewId={review.review_id}
+                  currentUser={currentUser}
+                  space={space}
+                />
+              );
+            }}
+            id={"commentsModal"}
+          />{" "}
+        </div>
+      ) : (
+        <div>
+          <button onClick={commentHandleOnClickList}>Comments</button>
+          {isComments ? (
+            <CommentList
+              reviewId={review.review_id}
+              currentUser={currentUser}
+              space={space}
+            />
+          ) : null}
+        </div>
+      )}
     </div>
   );
 };

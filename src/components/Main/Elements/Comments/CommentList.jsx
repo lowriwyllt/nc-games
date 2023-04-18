@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as api from "../../../../api";
 import CommentCard from "./CommentCard";
 import { Link } from "react-router-dom";
-import CommentModal from "../CommentModal";
+import MyModal from "../General/Modal";
 
 const CommentList = ({ reviewId, currentUser, space }) => {
   const [comments, setComments] = useState([]);
@@ -95,6 +95,14 @@ const CommentList = ({ reviewId, currentUser, space }) => {
             <br />
             {err ? <p>{err}</p> : null}
             <button disabled={disabledSubmit}>Submit</button>
+            <MyModal
+              modalIsOpen={modalIsOpen}
+              setIsOpen={setIsOpen}
+              contentLabel={"Comment Modal"}
+              Content={() => {
+                return <p>Your comment has been submitted!</p>;
+              }}
+            />
           </form>
         ) : null
       ) : (
@@ -102,7 +110,6 @@ const CommentList = ({ reviewId, currentUser, space }) => {
           See all comments...
         </Link>
       )}
-      <CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
