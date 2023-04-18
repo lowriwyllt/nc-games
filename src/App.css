@@ -249,3 +249,22 @@ textarea {
   background-color: black;
   color: white;
 }
+
+.submittedAPost {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  width: 75%;
+  margin: 100px auto;
+  text-align: center;
+  padding: 10px;
+  border: 8px double var(--brightBlue);
+  border-radius: 15px;
+}
+
+.submittedAPost button {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  font-size: large;
+  padding: auto;
+}

@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
 import * as api from "../../../api";
 import CommentCard from "./CommentCard";
+import { Link } from "react-router-dom";
+import CommentModal from "./CommentModal";
 
-const CommentList = ({ reviewId, currentUser }) => {
+const CommentList = ({ reviewId, currentUser, space }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [commentBody, setCommentBody] = useState("Comment...");
   const [err, setErr] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    api.fetchCommentOnReview(reviewId).then((data) => {
-      setComments(data);
-      setIsLoading(false);
-    });
+    if (space === "list") {
+      api.fetchCommentOnReview(reviewId, 3).then((data) => {
+        setComments(data);
+        setIsLoading(false);
+      });
+    } else if (space === "single") {
+      api.fetchCommentOnReview(reviewId).then((data) => {
+        setComments(data);
+        setIsLoading(false);
+      });
+    }
   }, []);
 
   const handleOnClick = () => {
@@ -41,6 +51,7 @@ const CommentList = ({ reviewId, currentUser }) => {
         .postCommentOfReview(reviewId, requestObj)
         .then((data) => {
           setComments([...comments, data]);
+          setIsOpen(true);
         })
         .catch(() => {
           setErr("something went wrong, try again later");
@@ -61,22 +72,29 @@ const CommentList = ({ reviewId, currentUser }) => {
           })}
         </div>
       )}
-      <form className="commentCard" onSubmit={handleOnSubmit}>
-        <p>{currentUser}</p>
-        <br />
-        <label htmlFor="commentBody">New comment...</label>
-        <br />
-        <textarea
-          id="commentBody"
-          name="commentBody"
-          value={commentBody}
-          onClick={handleOnClick}
-          onChange={handleOnChange}
-        />
-        <br />
-        {err ? <p>{err}</p> : null}
-        <button>Submit</button>
-      </form>
+      {space === "single" ? (
+        <form className="commentCard" onSubmit={handleOnSubmit}>
+          <p>{currentUser}</p>
+          <br />
+          <label htmlFor="commentBody">New comment...</label>
+          <br />
+          <textarea
+            id="commentBody"
+            name="commentBody"
+            value={commentBody}
+            onClick={handleOnClick}
+            onChange={handleOnChange}
+          />
+          <br />
+          {err ? <p>{err}</p> : null}
+          <button>Submit</button>
+        </form>
+      ) : (
+        <Link to={`/reviews/${reviewId}`} className="green">
+          See all comments...
+        </Link>
+      )}
+      <CommentModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };

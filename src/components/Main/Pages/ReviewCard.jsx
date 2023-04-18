@@ -43,7 +43,11 @@ const ReviewCard = ({ review, space, currentUser }) => {
       {err ? <p>{err}</p> : null}
       <button onClick={commentHandleOnClick}>Comments</button>
       {isComments ? (
-        <CommentList reviewId={review.review_id} currentUser={currentUser} />
+        <CommentList
+          reviewId={review.review_id}
+          currentUser={currentUser}
+          space={space}
+        />
       ) : null}
     </div>
   );
