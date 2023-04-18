@@ -12,6 +12,8 @@ const ReviewsList = ({
   queries,
 }) => {
   const [reviews, setReviews] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [pageCount, setPageCount] = useState(10);
   const reviewsGreenList = [
     "created_at",
     "review_id",
@@ -40,7 +42,8 @@ const ReviewsList = ({
             queries.page
           )
           .then((data) => {
-            setReviews(data);
+            setReviews(data.reviews);
+            setTotalCount(data.total_count);
             setIsLoading(false);
           });
       });
@@ -85,10 +88,15 @@ const ReviewsList = ({
           })}
         </select>
       </div>
+
       <p>{loadingMessage}</p>
-      {reviews.map((review) => {
-        return <ReviewCard key={review.review_id} review={review} />;
-      })}
+      <div className="reviewCards">
+        {reviews.map((review) => {
+          return <ReviewCard key={review.review_id} review={review} />;
+        })}
+      </div>
+      <p>Pages</p>
+      <p>Page numbers will go here</p>
     </section>
   );
 };

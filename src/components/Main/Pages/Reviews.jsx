@@ -15,7 +15,7 @@ const Reviews = ({
 
   useEffect(() => {
     setQueries({ ...queries, category: category_slug });
-  }, [category_slug, queries]);
+  }, [category_slug]);
 
   return (
     <main>
