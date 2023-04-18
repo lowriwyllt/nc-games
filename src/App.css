@@ -1,3 +1,9 @@
+:root {
+  --brightGreen: #00ff00;
+  --brightBlue: #00a1d6;
+  --purple: #4b0082;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,23 +21,23 @@ a {
   font-family: "Roboto Mono", monospace;
   font-size: max(1.7vw, 16px);
   margin-left: 10px;
-  caret-color: #00ff00;
+  caret-color: var(--brightGreen);
   /* caret-shape: block; */
   padding: 2px;
 }
 
 .green {
-  color: #00ff00;
+  color: var(--brightGreen);
 }
 
 h1 {
   font-family: "Press Start 2P", cursive;
-  color: #00ff00;
+  color: var(--brightGreen);
 }
 
 h2 {
   font-family: "Press Start 2P", cursive;
-  color: #00ff00;
+  color: var(--brightGreen);
   margin: 10px 0;
 }
 
@@ -69,7 +75,7 @@ main {
   position: sticky;
   top: 0;
   right: 0;
-  background-color: #00bfff;
+  background-color: var(--brightBlue);
   display: flex;
   padding: 5px;
   grid-area: nav;
@@ -80,7 +86,7 @@ main {
   height: 100vh;
   min-height: 100vh;
   align-items: end;
-  box-shadow: 2px 0px 10px 5px #00bfff;
+  box-shadow: 2px 0px 10px 5px var(--brightBlue);
   clip-path: inset(0px 0px 0px -10px);
 }
 
@@ -121,7 +127,7 @@ main {
 }
 
 footer {
-  background-color: #4b0082;
+  background-color: var(--purple);
   color: #ffff00;
   text-align: center;
   padding-top: 10px;
@@ -131,7 +137,7 @@ footer {
   min-height: 50px;
   /* font-family: "Roboto Mono", monospace; */
   font-size: max(1.6vw, 16px);
-  box-shadow: 0px 2px 10px 5px #4b0082;
+  box-shadow: 0px 2px 10px 5px var(--purple);
   clip-path: inset(-10px 0px 0px -10px);
 }
 
@@ -164,7 +170,7 @@ select {
   font-family: "Roboto Mono", monospace;
   color: #ffffff;
   background-color: #000000;
-  border: 2px solid #00a1d6;
+  border: 2px solid var(--brightBlue);
   border-radius: 10px;
   padding: 5px;
   margin: 5px 2px;
@@ -174,14 +180,14 @@ button {
   font-family: "Roboto Mono", monospace;
   color: #ffffff;
   background-color: #000000;
-  border: 2px solid #00a1d6;
+  border: 2px solid var(--brightBlue);
   border-radius: 10px;
   padding: 5px;
   margin: 10px;
 }
 
 button:hover {
-  border: 2px solid #00ff00;
+  border: 2px solid var(--brightGreen);
 }
 
 button:disabled {
@@ -200,14 +206,14 @@ button:disabled {
 
 .reviewCards .reviewCard {
   width: 90%;
-  border: 8px double #00a1d6;
+  border: 8px double var(--brightBlue);
   border-radius: 15px;
   padding: 10px;
   margin: 10px;
 }
 
 .reviewCards .reviewCard:hover {
-  border: 8px double #00ff00;
+  border: 8px double var(--brightGreen);
 }
 
 .reviewCard .reviewCardLink {
@@ -228,7 +234,7 @@ button:disabled {
 
 .commentCard {
   width: 90%;
-  border: 8px double #00a1d6;
+  border: 8px double var(--brightBlue);
   border-radius: 15px;
   padding: 10px;
   margin: 10px;
