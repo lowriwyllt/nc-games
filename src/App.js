@@ -40,6 +40,14 @@ function App() {
           }
         />
         <Route
+          path="/reviews/:reviewId"
+          element={
+            <main>
+              <p>Review Single</p>
+            </main>
+          }
+        />
+        <Route
           path="/categories/:category_slug/reviews"
           element={
             <Reviews
