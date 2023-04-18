@@ -27,6 +27,7 @@ const ReviewsList = ({
   ];
 
   useEffect(() => {
+    setIsLoading(true);
     api
       .fetchCategories()
       .then((data) => {
@@ -62,9 +63,6 @@ const ReviewsList = ({
     setQueries({ ...queries, sortBy: event.target.value });
   };
 
-  let loadingMessage = "Loading...";
-  if (isLoading === false) loadingMessage = "";
-
   return (
     <section id="reviewList">
       <div className="dropdown">
@@ -88,17 +86,26 @@ const ReviewsList = ({
           })}
         </select>
       </div>
-
-      <p>{loadingMessage}</p>
-      <div className="reviewCards">
-        {reviews.map((review) => {
-          return (
-            <ReviewCard key={review.review_id} review={review} space={"list"} />
-          );
-        })}
-      </div>
-      <p>Pages</p>
-      <p>Page numbers will go here</p>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          {" "}
+          <div className="reviewCards">
+            {reviews.map((review) => {
+              return (
+                <ReviewCard
+                  key={review.review_id}
+                  review={review}
+                  space={"list"}
+                />
+              );
+            })}
+          </div>
+          <p>Pages</p>
+          <p>Page numbers will go here</p>
+        </div>
+      )}
     </section>
   );
 };

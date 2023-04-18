@@ -4,18 +4,21 @@ import Header from "./Header";
 import ReviewCard from "./ReviewCard";
 import { Link, useParams } from "react-router-dom";
 
-const SingleReview = ({ setActiveNavbar }) => {
+const SingleReview = ({ setActiveNavbar, isLoading, setIsLoading }) => {
   const { reviewId } = useParams();
   const [review, setReview] = useState({});
   useEffect(() => {
+    setIsLoading(true);
     api.fetchReview(reviewId).then((data) => {
       setReview(data);
+      setIsLoading(false);
     });
   }, [reviewId]);
 
   const handleOnClick = () => {
     setActiveNavbar(false);
   };
+
   return (
     <main>
       <Header setActiveNavbar={setActiveNavbar} />
@@ -25,9 +28,13 @@ const SingleReview = ({ setActiveNavbar }) => {
           Back to all reviews
         </Link>
       </p>
-      <div className="singleReview">
-        <ReviewCard review={review} space={"single"} />
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="singleReview">
+          <ReviewCard review={review} space={"single"} />
+        </div>
+      )}
     </main>
   );
 };

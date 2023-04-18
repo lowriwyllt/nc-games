@@ -42,7 +42,13 @@ function App() {
         />
         <Route
           path="/reviews/:reviewId"
-          element={<SingleReview setActiveNavbar={setActiveNavbar} />}
+          element={
+            <SingleReview
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              setActiveNavbar={setActiveNavbar}
+            />
+          }
         />
         <Route
           path="/categories/:category_slug/reviews"
