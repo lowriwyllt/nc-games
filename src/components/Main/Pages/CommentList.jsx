@@ -27,6 +27,7 @@ const CommentList = ({ reviewId, currentUser }) => {
   };
 
   const handleOnSubmit = (event) => {
+    setCommentBody("");
     event.preventDefault();
     setErr(null);
     const requestObj = {
