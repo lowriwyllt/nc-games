@@ -32,6 +32,7 @@ h1 {
 h2 {
   font-family: "Press Start 2P", cursive;
   color: #00ff00;
+  margin: 10px 0;
 }
 
 p {
@@ -179,13 +180,25 @@ button {
   margin: 10px;
 }
 
-.reviewCard img {
+button:hover {
+  border: 2px solid #00ff00;
+}
+
+button:disabled {
+  border: 2px solid #7e7e7e;
+}
+
+.reviewCards .reviewCard img {
   width: 90%;
   display: block;
   margin: 10px auto;
 }
 
-.reviewCard {
+.singleReview .reviewCard img {
+  width: min(90%, 400px);
+}
+
+.reviewCards .reviewCard {
   width: 90%;
   border: 8px double #00a1d6;
   border-radius: 15px;
@@ -193,8 +206,16 @@ button {
   margin: 10px;
 }
 
+.reviewCards .reviewCard:hover {
+  border: 8px double #00ff00;
+}
+
+.reviewCard .reviewCardLink {
+  color: white;
+}
+
 @media only screen and (min-width: 768px) {
-  .reviewCard {
+  .reviewCards .reviewCard {
     width: 44%;
   }
 

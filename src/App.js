@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./components/Main/LandingPage";
 import NoEntry from "./components/Main/NoEntry";
 import Reviews from "./components/Main/Pages/Reviews";
+import SingleReview from "./components/Main/Pages/SingleReview";
 
 function App() {
   const [activeNavbar, setActiveNavbar] = useState(false);
@@ -38,6 +39,10 @@ function App() {
               setCategories={setCategories}
             />
           }
+        />
+        <Route
+          path="/reviews/:reviewId"
+          element={<SingleReview setActiveNavbar={setActiveNavbar} />}
         />
         <Route
           path="/categories/:category_slug/reviews"

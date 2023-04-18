@@ -1,8 +1,9 @@
 import { useState } from "react";
 import * as api from "../../../api";
 import CommentList from "./CommentList";
+import { Link } from "react-router-dom";
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, space }) => {
   const [err, setErr] = useState(null);
   const [addedVotes, setAddedVotes] = useState(0);
   const [comments, setComments] = useState(false);
@@ -24,18 +25,23 @@ const ReviewCard = ({ review }) => {
 
   return (
     <div className="reviewCard">
-      <h3>{review.title}</h3>
-      <img src={review.review_img_url} alt={review.title} />
+      <Link to={`/reviews/${review.review_id}`} className="reviewCardLink">
+        <h3>{review.title}</h3>
+        <img src={review.review_img_url} alt={review.title} />
+        <p>
+          <i>{review.owner}</i> reviewed at {date}
+        </p>
+        {space === "single" ? <br /> : null}
+        {space === "single" ? <p>{review.review_body}</p> : null}
+      </Link>
       <p>
-        {review.owner} reviewed at {date}
+        Votes: {review.votes + addedVotes} Comments: {review.comment_count}
       </p>
-      <p>Votes: {review.votes + addedVotes}</p>
       <button onClick={votesHandleOnClick} disabled={addedVotes === 1}>
         Votes
       </button>
       {err ? <p>{err}</p> : null}
       <button onClick={commentHandleOnClick}>Comments</button>
-
       {comments ? <CommentList /> : null}
     </div>
   );

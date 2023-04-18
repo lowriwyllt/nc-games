@@ -28,6 +28,7 @@ const LandingPage = ({ setActiveNavbar }) => {
           Welcome to NC Games​ <br /> Would you like to continue to the rest of
           the site? Y/n​
         </label>
+        <br />
         <input
           id="continue"
           name="continue"

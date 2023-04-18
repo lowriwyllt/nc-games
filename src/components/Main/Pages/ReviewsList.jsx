@@ -92,7 +92,9 @@ const ReviewsList = ({
       <p>{loadingMessage}</p>
       <div className="reviewCards">
         {reviews.map((review) => {
-          return <ReviewCard key={review.review_id} review={review} />;
+          return (
+            <ReviewCard key={review.review_id} review={review} space={"list"} />
+          );
         })}
       </div>
       <p>Pages</p>
