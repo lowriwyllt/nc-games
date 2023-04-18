@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./components/Main/LandingPage";
 import NoEntry from "./components/Main/NoEntry";
 import Reviews from "./components/Main/Pages/Reviews";
+import SingleReview from "./components/Main/Pages/SingleReview";
 
 function App() {
   const [activeNavbar, setActiveNavbar] = useState(false);
@@ -39,14 +40,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/reviews/:reviewId"
-          element={
-            <main>
-              <p>Review Single</p>
-            </main>
-          }
-        />
+        <Route path="/reviews/:reviewId" element={<SingleReview />} />
         <Route
           path="/categories/:category_slug/reviews"
           element={

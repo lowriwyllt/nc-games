@@ -24,12 +24,14 @@ const ReviewCard = ({ review }) => {
   const date = new Date(review.created_at).toLocaleString();
 
   return (
-    <Link to={`/reviews/${review.review_id}`} className="reviewCard">
-      <h3>{review.title}</h3>
-      <img src={review.review_img_url} alt={review.title} />
-      <p>
-        {review.owner} reviewed at {date}
-      </p>
+    <div className="reviewCard">
+      <Link to={`/reviews/${review.review_id}`} className="reviewCardLink">
+        <h3>{review.title}</h3>
+        <img src={review.review_img_url} alt={review.title} />
+        <p>
+          {review.owner} reviewed at {date}
+        </p>
+      </Link>
       <p>Votes: {review.votes + addedVotes}</p>
       <button onClick={votesHandleOnClick} disabled={addedVotes === 1}>
         Votes
@@ -38,7 +40,7 @@ const ReviewCard = ({ review }) => {
       <button onClick={commentHandleOnClick}>Comments</button>
 
       {comments ? <CommentList /> : null}
-    </Link>
+    </div>
   );
 };
 
