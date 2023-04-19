@@ -88,7 +88,23 @@ const ReviewsList = ({
   };
 
   const orderByHandleChange = (event) => {
-    setSortBy((currSortBy) => (currSortBy === "desc" ? "asc" : "desc"));
+    if (queries.order === "asc" && queries.sortBy === "created_at") {
+      //because in this case asc will change to desc
+      if (queries.category === "") {
+        navigate("/reviews");
+      } else {
+        navigate(`/categories/${event.target.value}/reviews`);
+      }
+    } else {
+      const newOrder = queries.order === "desc" ? "asc" : "desc";
+      if (queries.category === "") {
+        navigate(`/reviews?sort_by=${queries.sortBy}&order=${newOrder}`);
+      } else {
+        navigate(
+          `/categories/${queries.category}/reviews?sort_by=${queries.sortBy}&order=${newOrder}`
+        );
+      }
+    }
   };
 
   return (

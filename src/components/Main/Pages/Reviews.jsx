@@ -17,9 +17,12 @@ const Reviews = ({
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    const newSort = searchParams.get("sort_by")
+      ? searchParams.get("sort_by")
+      : "created_at";
     setQueries({
       ...queries,
-      sortBy: searchParams.get("sort_by"),
+      sortBy: newSort,
       order: searchParams.get("order"),
     });
   }, [searchParams]);

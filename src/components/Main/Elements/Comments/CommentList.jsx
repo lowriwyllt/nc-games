@@ -98,14 +98,16 @@ const CommentList = ({ reviewId, currentUser, space }) => {
             <br />
             <label htmlFor="commentBody">New comment...</label>
             <br />
-            <textarea
-              id="commentBody"
-              name="commentBody"
-              placeholder="comment..."
-              value={commentBody}
-              onClick={handleOnClick}
-              onChange={handleOnChange}
-            />
+            <div className="grow-wrap">
+              <textarea
+                id="commentBody"
+                name="commentBody"
+                placeholder="comment..."
+                value={commentBody}
+                onClick={handleOnClick}
+                onChange={handleOnChange}
+              />
+            </div>
             <br />
             {err ? <p>{err}</p> : null}
             <button disabled={disabledSubmit}>Submit</button>
