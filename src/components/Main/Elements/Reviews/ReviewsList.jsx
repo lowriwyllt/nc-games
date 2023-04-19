@@ -25,6 +25,7 @@ const ReviewsList = ({
   };
 
   useEffect(() => {
+    console.log(queries);
     setIsLoading(true);
     api
       .fetchCategories()
@@ -68,12 +69,14 @@ const ReviewsList = ({
   return (
     <section id="reviewList">
       <form className="dropdown">
+        {console.log("defaultVal before :", queries.category)}
         <select
-          defaultValue={queries.category}
+          value={queries.category}
           name="category"
           id="category"
           onChange={categoryHandleChange}
         >
+          {console.log("defaultVal", queries.category)}
           <option value="">All categories</option>
           {categories.map((category, index) => {
             return (
@@ -97,6 +100,38 @@ const ReviewsList = ({
           <span className="slider round"></span>
         </label>
       </form>
+      {/* <form className="dropdown">
+        {console.log("defaultVal before :", queries.category)}
+        <select
+          defaultValue={queries.category}
+          name="category"
+          id="category"
+          onChange={categoryHandleChange}
+        >
+          {console.log("defaultVal", queries.category)}
+          <option value="">All categories</option>
+          {categories.map((category, index) => {
+            return (
+              <option key={index} value={category.slug}>
+                {category.slug[0].toUpperCase() + category.slug.slice(1)}
+              </option>
+            );
+          })}
+        </select>
+        <select name="sortby" id="sortBy" onChange={sortbyHandleChange}>
+          {Object.keys(sortByGreenList).map((sortByKey, index) => {
+            return (
+              <option key={index} value={sortByGreenList[sortByKey]}>
+                {sortByKey[0].toUpperCase() + sortByKey.slice(1)}
+              </option>
+            );
+          })}
+        </select>
+        <label className="switch">
+          <input type="checkbox" onChange={orderByHandleChange} />
+          <span className="slider round"></span>
+        </label>
+      </form> */}
       {isLoading ? (
         <PixelLoader />
       ) : (

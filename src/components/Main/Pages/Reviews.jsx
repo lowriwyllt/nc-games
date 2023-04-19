@@ -16,7 +16,11 @@ const Reviews = ({
   const { category_slug } = useParams();
 
   useEffect(() => {
-    setQueries({ ...queries, category: category_slug });
+    if (category_slug) {
+      setQueries({ ...queries, category: category_slug });
+    } else {
+      setQueries({ ...queries, category: "" });
+    }
   }, [category_slug]);
 
   return (
