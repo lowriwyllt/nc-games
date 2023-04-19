@@ -7,11 +7,13 @@ import LandingPage from "./components/Main/LandingPage";
 import NoEntry from "./components/Main/NoEntry";
 import Reviews from "./components/Main/Pages/Reviews";
 import SingleReview from "./components/Main/Pages/SingleReview";
+import PixelLoader from "./components/Main/Elements/General/PixelLoader";
 
 function App() {
   const [activeNavbar, setActiveNavbar] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
 
   let appClass = "App";
   if (activeNavbar) {
@@ -37,6 +39,7 @@ function App() {
               setActiveNavbar={setActiveNavbar}
               categories={categories}
               setCategories={setCategories}
+              currentUser={currentUser}
             />
           }
         />
@@ -47,6 +50,7 @@ function App() {
               isLoading={isLoading}
               setIsLoading={setIsLoading}
               setActiveNavbar={setActiveNavbar}
+              currentUser={currentUser}
             />
           }
         />
@@ -59,9 +63,11 @@ function App() {
               setActiveNavbar={setActiveNavbar}
               categories={categories}
               setCategories={setCategories}
+              currentUser={currentUser}
             />
           }
         />
+        <Route path="/test" element={<PixelLoader />} />
       </Routes>
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
       <Footer />

@@ -1,7 +1,7 @@
-import * as api from "../../../api";
+import * as api from "../../../../api";
 import { useEffect, useState } from "react";
-import ReviewCard from "./ReviewCard";
 import { useNavigate } from "react-router-dom";
+import ReviewCard from "./ReviewCard";
 
 const ReviewsList = ({
   categories,
@@ -10,10 +10,12 @@ const ReviewsList = ({
   setIsLoading,
   setQueries,
   queries,
+  currentUser,
 }) => {
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [pageCount, setPageCount] = useState(10);
+  const [sortBy, setSortBy] = useState("desc");
   const reviewsGreenList = [
     "created_at",
     "review_id",
@@ -63,9 +65,13 @@ const ReviewsList = ({
     setQueries({ ...queries, sortBy: event.target.value });
   };
 
+  const orderByHandleChange = (event) => {
+    setSortBy((currSortBy) => (currSortBy === "desc" ? "asc" : "desc"));
+  };
+
   return (
     <section id="reviewList">
-      <div className="dropdown">
+      <form className="dropdown">
         <select name="category" id="category" onChange={categoryHandleChange}>
           <option value="">Categories</option>
           {categories.map((category, index) => {
@@ -85,7 +91,11 @@ const ReviewsList = ({
             );
           })}
         </select>
-      </div>
+        <label className="switch">
+          <input type="checkbox" onChange={orderByHandleChange} />
+          <span className="slider round"></span>
+        </label>
+      </form>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -98,6 +108,7 @@ const ReviewsList = ({
                   key={review.review_id}
                   review={review}
                   space={"list"}
+                  currentUser={currentUser}
                 />
               );
             })}

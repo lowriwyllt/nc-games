@@ -1,4 +1,4 @@
-import Title from "../Title";
+import Title from "../../Title";
 import LoginLink from "./LoginLink";
 
 const Header = ({ setActiveNavbar }) => {

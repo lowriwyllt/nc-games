@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Header from "./Header";
-import ReviewsList from "./ReviewsList";
 import { useParams } from "react-router-dom";
+import Header from "../Elements/General/Header";
+import ReviewsList from "../Elements/Reviews/ReviewsList";
 
 const Reviews = ({
   setActiveNavbar,
@@ -9,6 +9,7 @@ const Reviews = ({
   setCategories,
   isLoading,
   setIsLoading,
+  currentUser,
 }) => {
   const [queries, setQueries] = useState({});
   const { category_slug } = useParams();
@@ -22,6 +23,7 @@ const Reviews = ({
       <Header setActiveNavbar={setActiveNavbar} />
       <h2>Reviews</h2>
       <ReviewsList
+        currentUser={currentUser}
         queries={queries}
         setQueries={setQueries}
         isLoading={isLoading}

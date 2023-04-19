@@ -1,10 +1,15 @@
 import * as api from "../../../api";
 import { useEffect, useState } from "react";
-import Header from "./Header";
-import ReviewCard from "./ReviewCard";
+import Header from "../Elements/General/Header";
+import ReviewCard from "../Elements/Reviews/ReviewCard";
 import { Link, useParams } from "react-router-dom";
 
-const SingleReview = ({ setActiveNavbar, isLoading, setIsLoading }) => {
+const SingleReview = ({
+  setActiveNavbar,
+  isLoading,
+  setIsLoading,
+  currentUser,
+}) => {
   const { reviewId } = useParams();
   const [review, setReview] = useState({});
   useEffect(() => {
@@ -32,7 +37,11 @@ const SingleReview = ({ setActiveNavbar, isLoading, setIsLoading }) => {
         <p>Loading...</p>
       ) : (
         <div className="singleReview">
-          <ReviewCard review={review} space={"single"} />
+          <ReviewCard
+            review={review}
+            space={"single"}
+            currentUser={currentUser}
+          />
         </div>
       )}
     </main>

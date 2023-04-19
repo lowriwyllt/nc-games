@@ -54,12 +54,31 @@ export const patchReviewVotes = (reviewId) => {
 };
 
 //Comments
-export const fetchCommentOfReview = (reviewId) => {
-  return gamesApi
-    .get(`/reviews/${reviewId}/comments`)
-    .then(({ data }) => data.comments);
+export const fetchCommentOnReview = (reviewId, limit, page) => {
+  let url = `/reviews/${reviewId}/comments`;
+  if (limit || page) {
+    url += "?";
+    let count = 0;
+    if (limit) {
+      if (count > 0) url += "&";
+      url += `${"limit"}=${limit}`;
+      count++;
+    }
+    if (page) {
+      if (count > 0) url += "&";
+      url += `${"p"}=${page}`;
+      count++;
+    }
+  }
+  return gamesApi.get(url).then(({ data }) => data.comments);
 };
 
 export const patchCommentVotes = (commentId) => {
   return gamesApi.patch(`/comments/${commentId}`, { inc_votes: 1 });
+};
+
+export const postCommentOfReview = (reviewId, commentToBePosted) => {
+  return gamesApi
+    .post(`/reviews/${reviewId}/comments`, commentToBePosted)
+    .then(({ data }) => data.comment);
 };
