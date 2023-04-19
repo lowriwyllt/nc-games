@@ -14,7 +14,11 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
-  const [reviewQueries, setReviewQueries] = useState({ category: "" });
+  const [reviewQueries, setReviewQueries] = useState({
+    category: "",
+    order: "desc",
+    sortBy: "created_at",
+  });
 
   let appClass = "App";
   if (activeNavbar) {

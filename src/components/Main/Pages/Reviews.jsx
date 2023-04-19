@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Header from "../Elements/General/Header";
 import ReviewsList from "../Elements/Reviews/ReviewsList";
 
@@ -14,6 +14,15 @@ const Reviews = ({
   setQueries,
 }) => {
   const { category_slug } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setQueries({
+      ...queries,
+      sortBy: searchParams.get("sort_by"),
+      order: searchParams.get("order"),
+    });
+  }, [searchParams]);
 
   useEffect(() => {
     if (category_slug) {
