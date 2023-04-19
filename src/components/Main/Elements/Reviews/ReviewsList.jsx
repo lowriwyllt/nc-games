@@ -16,18 +16,13 @@ const ReviewsList = ({
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [pageCount, setPageCount] = useState(10);
-  const [sortBy, setSortBy] = useState("desc");
-  const reviewsGreenList = [
-    "created_at",
-    "review_id",
-    "title",
-    "category",
-    "designer",
-    "owner",
-    "review_body",
-    "review_img_url",
-    "votes",
-  ];
+  const [sortBy, setSortBy] = useState("created_at");
+
+  const sortByGreenList = {
+    date: "created_at",
+    // "comment count":, - don't think I did this in backend
+    votes: "votes",
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -89,10 +84,10 @@ const ReviewsList = ({
           })}
         </select>
         <select name="sortby" id="sortBy" onChange={sortbyHandleChange}>
-          {reviewsGreenList.map((sortBy, index) => {
+          {Object.keys(sortByGreenList).map((sortByKey, index) => {
             return (
-              <option key={index} value={sortBy}>
-                {sortBy[0].toUpperCase() + sortBy.slice(1)}
+              <option key={index} value={sortByGreenList[sortByKey]}>
+                {sortByKey[0].toUpperCase() + sortByKey.slice(1)}
               </option>
             );
           })}
