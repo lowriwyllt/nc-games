@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "../Elements/General/Header";
 import ReviewCard from "../Elements/Reviews/ReviewCard";
 import { Link, useParams } from "react-router-dom";
+import PixelLoader from "../Elements/General/PixelLoader";
 
 const SingleReview = ({
   setActiveNavbar,
@@ -34,7 +35,7 @@ const SingleReview = ({
         </Link>
       </p>
       {isLoading ? (
-        <p>Loading...</p>
+        <PixelLoader />
       ) : (
         <div className="singleReview">
           <ReviewCard

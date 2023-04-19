@@ -3,6 +3,7 @@ import * as api from "../../../../api";
 import CommentCard from "./CommentCard";
 import { Link } from "react-router-dom";
 import MyModal from "../General/Modal";
+import PixelLoader from "../General/PixelLoader";
 
 const CommentList = ({ reviewId, currentUser, space }) => {
   const [comments, setComments] = useState([]);
@@ -80,7 +81,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
         }}
       />
       {isLoading ? (
-        <p>Loading...</p>
+        <PixelLoader />
       ) : comments.length === 0 ? (
         <p>No comment yet...</p>
       ) : (

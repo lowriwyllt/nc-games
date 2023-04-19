@@ -2,6 +2,7 @@ import * as api from "../../../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
+import PixelLoader from "../General/PixelLoader";
 
 const ReviewsList = ({
   categories,
@@ -97,7 +98,7 @@ const ReviewsList = ({
         </label>
       </form>
       {isLoading ? (
-        <p>Loading...</p>
+        <PixelLoader />
       ) : (
         <div>
           {" "}

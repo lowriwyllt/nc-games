@@ -67,7 +67,6 @@ function App() {
             />
           }
         />
-        <Route path="/test" element={<PixelLoader />} />
       </Routes>
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
       <Footer />
