@@ -1,3 +1,4 @@
+/* ---------------------General---------------------------------------------------------------------------------------------------- */
 :root {
   --brightGreen: #00ff00;
   --brightBlue: #00a1d6;
@@ -10,40 +11,7 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
-#gameLandingForm input {
-  background-color: black;
-  border: 1px solid rgb(98, 98, 98);
-  color: white;
-  font-family: "Roboto Mono", monospace;
-  font-size: max(1.7vw, 16px);
-  caret-color: var(--brightGreen);
-  padding: 4px;
-}
-
-.green {
-  color: var(--brightGreen);
-}
-
-h1,
-h2 {
-  font-family: "Press Start 2P", cursive;
-  color: var(--brightGreen);
-}
-
-h2 {
-  margin: 10px 0;
-}
-
-p {
-  font-family: "Roboto Mono", monospace;
-  font-size: max(1.6vw, 16px);
-}
-
+/* ----------------------App------------------------------------------------------------------------------------------------------- */
 .App {
   max-width: 100vw;
   min-height: 100vh;
@@ -62,6 +30,7 @@ p {
     "footer nav" 50px / 1fr max(100px, 10vw);
 }
 
+/* ------------------Part of App--------------------------------------------------------------------------------------------------- */
 main {
   width: 90%;
   margin: 5vw auto;
@@ -137,6 +106,51 @@ footer {
   clip-path: inset(-10px 0px 0px -10px);
 }
 
+/* ---------------------Text---------------------------------------------------------------------------------------------------- */
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.green {
+  color: var(--brightGreen);
+}
+
+h1,
+h2 {
+  font-family: "Press Start 2P", cursive;
+  color: var(--brightGreen);
+  margin: 10px 0;
+}
+
+p {
+  font-family: "Roboto Mono", monospace;
+  font-size: max(1.6vw, 16px);
+}
+
+/* ------------------Landing Page------------------------------------------------------------------------------------------------ */
+#gameLandingForm input {
+  background-color: black;
+  border: 1px solid rgb(98, 98, 98);
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+  font-size: max(1.7vw, 16px);
+  caret-color: var(--brightGreen);
+  margin-top: 10px;
+  padding: 4px;
+}
+
+.centerGame {
+  font-family: "Roboto Mono", monospace;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 25%;
+  background-color: #000000;
+}
+
+/*-----------------General Elements---------------------------------------------------------------------------------------------- */
+
 header {
   display: grid;
   grid-template: "Title login_icon" auto / 1fr 1fr;
@@ -152,24 +166,6 @@ header {
 
 #login_link p {
   margin: 10px;
-}
-
-.centerGame {
-  font-family: "Roboto Mono", monospace;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 25%;
-  background-color: #000000;
-}
-
-select {
-  font-family: "Roboto Mono", monospace;
-  color: #ffffff;
-  background-color: #000000;
-  border: 2px solid var(--brightBlue);
-  border-radius: 10px;
-  padding: 5px;
-  margin: 5px 2px;
 }
 
 button {
@@ -189,6 +185,39 @@ button:hover {
 
 button:disabled {
   border: 2px solid #7e7e7e;
+}
+
+.modal {
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  width: min(90%, 300px);
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  border: 8px double var(--brightBlue);
+  border-radius: 15px;
+}
+
+.modal .closeModal {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  font-size: large;
+  padding: auto;
+}
+
+select {
+  font-family: "Roboto Mono", monospace;
+  color: #ffffff;
+  background-color: #000000;
+  border: 2px solid var(--brightBlue);
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px 2px;
 }
 
 .reviewCards .reviewCard img {
@@ -244,32 +273,11 @@ textarea {
   color: white;
 }
 
-.modal {
-  background-color: rgb(0, 0, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: white;
-  width: min(90%, 300px);
-  margin: auto;
-  text-align: center;
-  padding: 10px;
-  border: 8px double var(--brightBlue);
-  border-radius: 15px;
-}
-
-.modal .closeModal {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  font-size: large;
-  padding: auto;
-}
-
 #commentsModal {
   width: 90%;
 }
+
+/* -------------------------Pixel Heart Element---------------------------------------------------------------------------- */
 
 .pixel-block {
   width: 60px;
@@ -317,7 +325,7 @@ textarea {
     25px 30px white, 20px 35px white;
 }
 
-/* The switch - the box around the slider */
+/* ------------------------------Switch for ASC/DESC------------------------------------------------------------------------ */
 .switch {
   position: relative;
   display: inline-block;
