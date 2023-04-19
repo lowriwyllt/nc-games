@@ -8,7 +8,7 @@ import PixelLoader from "../General/PixelLoader";
 const CommentList = ({ reviewId, currentUser, space }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [commentBody, setCommentBody] = useState("Comment...");
+  const [commentBody, setCommentBody] = useState("");
   const [err, setErr] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [disabledForm, setDisabledForm] = useState(true);
@@ -101,6 +101,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
             <textarea
               id="commentBody"
               name="commentBody"
+              placeholder="comment..."
               value={commentBody}
               onClick={handleOnClick}
               onChange={handleOnChange}
