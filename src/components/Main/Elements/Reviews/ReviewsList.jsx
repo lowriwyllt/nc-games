@@ -20,7 +20,7 @@ const ReviewsList = ({
 
   const sortByGreenList = {
     date: "created_at",
-    // "comment count":, - don't think I did this in backend
+    comments: "comment_count",
     votes: "votes",
   };
 
