@@ -7,6 +7,7 @@ import LandingPage from "./components/Main/LandingPage";
 import NoEntry from "./components/Main/NoEntry";
 import Reviews from "./components/Main/Pages/Reviews";
 import SingleReview from "./components/Main/Pages/SingleReview";
+import PixelLoader from "./components/Main/Elements/General/PixelLoader";
 
 function App() {
   const [activeNavbar, setActiveNavbar] = useState(false);
@@ -66,6 +67,7 @@ function App() {
             />
           }
         />
+        <Route path="/test" element={<PixelLoader />} />
       </Routes>
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
       <Footer />
