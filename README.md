@@ -1,6 +1,6 @@
 # NC Games
 
-Deployed version:
+Deployed version: https://lowrigames.netlify.app/
 
 This project was to create a blogging system.
 
