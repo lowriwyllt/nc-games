@@ -2,9 +2,10 @@ import "./PixelLoader.css";
 
 const PixelLoader = () => {
   return (
-    <main>
+    <div>
+      <p>Loading...</p>
       <div id="loader"></div>
-    </main>
+    </div>
   );
 };
 

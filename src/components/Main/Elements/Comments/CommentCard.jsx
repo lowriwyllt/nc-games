@@ -28,7 +28,7 @@ const CommentCard = ({ comment }) => {
         onClick={votesHandleOnClick}
         disabled={addedVotes === 1}
       >
-        <div class="pixelized--heart"></div>
+        <div className="pixelized--heart"></div>
       </button>
     </div>
   );

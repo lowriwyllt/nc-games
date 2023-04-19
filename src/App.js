@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar/Navbar";
@@ -14,6 +14,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
+  const [reviewQueries, setReviewQueries] = useState({ category: "" });
 
   let appClass = "App";
   if (activeNavbar) {
@@ -40,6 +41,8 @@ function App() {
               categories={categories}
               setCategories={setCategories}
               currentUser={currentUser}
+              queries={reviewQueries}
+              setQueries={setReviewQueries}
             />
           }
         />
@@ -51,6 +54,7 @@ function App() {
               setIsLoading={setIsLoading}
               setActiveNavbar={setActiveNavbar}
               currentUser={currentUser}
+              reviewQueries={reviewQueries}
             />
           }
         />
@@ -64,10 +68,11 @@ function App() {
               categories={categories}
               setCategories={setCategories}
               currentUser={currentUser}
+              queries={reviewQueries}
+              setQueries={setReviewQueries}
             />
           }
         />
-        <Route path="/test" element={<PixelLoader />} />
       </Routes>
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
       <Footer />

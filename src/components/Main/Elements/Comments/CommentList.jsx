@@ -3,11 +3,12 @@ import * as api from "../../../../api";
 import CommentCard from "./CommentCard";
 import { Link } from "react-router-dom";
 import MyModal from "../General/Modal";
+import PixelLoader from "../General/PixelLoader";
 
 const CommentList = ({ reviewId, currentUser, space }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [commentBody, setCommentBody] = useState("Comment...");
+  const [commentBody, setCommentBody] = useState("");
   const [err, setErr] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [disabledForm, setDisabledForm] = useState(true);
@@ -80,7 +81,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
         }}
       />
       {isLoading ? (
-        <p>Loading...</p>
+        <PixelLoader />
       ) : comments.length === 0 ? (
         <p>No comment yet...</p>
       ) : (
@@ -100,6 +101,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
             <textarea
               id="commentBody"
               name="commentBody"
+              placeholder="comment..."
               value={commentBody}
               onClick={handleOnClick}
               onChange={handleOnChange}

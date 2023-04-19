@@ -2,6 +2,7 @@ import * as api from "../../../../api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
+import PixelLoader from "../General/PixelLoader";
 
 const ReviewsList = ({
   categories,
@@ -15,20 +16,16 @@ const ReviewsList = ({
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [pageCount, setPageCount] = useState(10);
-  const [sortBy, setSortBy] = useState("desc");
-  const reviewsGreenList = [
-    "created_at",
-    "review_id",
-    "title",
-    "category",
-    "designer",
-    "owner",
-    "review_body",
-    "review_img_url",
-    "votes",
-  ];
+  const [sortBy, setSortBy] = useState("created_at");
+
+  const sortByGreenList = {
+    date: "created_at",
+    // "comment count":, - don't think I did this in backend
+    votes: "votes",
+  };
 
   useEffect(() => {
+    console.log(queries);
     setIsLoading(true);
     api
       .fetchCategories()
@@ -72,8 +69,15 @@ const ReviewsList = ({
   return (
     <section id="reviewList">
       <form className="dropdown">
-        <select name="category" id="category" onChange={categoryHandleChange}>
-          <option value="">Categories</option>
+        {console.log("defaultVal before :", queries.category)}
+        <select
+          value={queries.category}
+          name="category"
+          id="category"
+          onChange={categoryHandleChange}
+        >
+          {console.log("defaultVal", queries.category)}
+          <option value="">All categories</option>
           {categories.map((category, index) => {
             return (
               <option key={index} value={category.slug}>
@@ -83,10 +87,10 @@ const ReviewsList = ({
           })}
         </select>
         <select name="sortby" id="sortBy" onChange={sortbyHandleChange}>
-          {reviewsGreenList.map((sortBy, index) => {
+          {Object.keys(sortByGreenList).map((sortByKey, index) => {
             return (
-              <option key={index} value={sortBy}>
-                {sortBy[0].toUpperCase() + sortBy.slice(1)}
+              <option key={index} value={sortByGreenList[sortByKey]}>
+                {sortByKey[0].toUpperCase() + sortByKey.slice(1)}
               </option>
             );
           })}
@@ -96,8 +100,40 @@ const ReviewsList = ({
           <span className="slider round"></span>
         </label>
       </form>
+      {/* <form className="dropdown">
+        {console.log("defaultVal before :", queries.category)}
+        <select
+          defaultValue={queries.category}
+          name="category"
+          id="category"
+          onChange={categoryHandleChange}
+        >
+          {console.log("defaultVal", queries.category)}
+          <option value="">All categories</option>
+          {categories.map((category, index) => {
+            return (
+              <option key={index} value={category.slug}>
+                {category.slug[0].toUpperCase() + category.slug.slice(1)}
+              </option>
+            );
+          })}
+        </select>
+        <select name="sortby" id="sortBy" onChange={sortbyHandleChange}>
+          {Object.keys(sortByGreenList).map((sortByKey, index) => {
+            return (
+              <option key={index} value={sortByGreenList[sortByKey]}>
+                {sortByKey[0].toUpperCase() + sortByKey.slice(1)}
+              </option>
+            );
+          })}
+        </select>
+        <label className="switch">
+          <input type="checkbox" onChange={orderByHandleChange} />
+          <span className="slider round"></span>
+        </label>
+      </form> */}
       {isLoading ? (
-        <p>Loading...</p>
+        <PixelLoader />
       ) : (
         <div>
           {" "}
