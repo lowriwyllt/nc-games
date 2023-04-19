@@ -15,6 +15,7 @@ const ReviewsList = ({
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [pageCount, setPageCount] = useState(10);
+  const [sortBy, setSortBy] = useState("desc");
   const reviewsGreenList = [
     "created_at",
     "review_id",
@@ -64,9 +65,13 @@ const ReviewsList = ({
     setQueries({ ...queries, sortBy: event.target.value });
   };
 
+  const orderByHandleChange = (event) => {
+    setSortBy((currSortBy) => (currSortBy === "desc" ? "asc" : "desc"));
+  };
+
   return (
     <section id="reviewList">
-      <div className="dropdown">
+      <form className="dropdown">
         <select name="category" id="category" onChange={categoryHandleChange}>
           <option value="">Categories</option>
           {categories.map((category, index) => {
@@ -86,7 +91,11 @@ const ReviewsList = ({
             );
           })}
         </select>
-      </div>
+        <label className="switch">
+          <input type="checkbox" onChange={orderByHandleChange} />
+          <span className="slider round"></span>
+        </label>
+      </form>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
