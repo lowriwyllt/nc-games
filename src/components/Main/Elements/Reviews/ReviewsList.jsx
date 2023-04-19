@@ -73,8 +73,13 @@ const ReviewsList = ({
   return (
     <section id="reviewList">
       <form className="dropdown">
-        <select name="category" id="category" onChange={categoryHandleChange}>
-          <option value="">Categories</option>
+        <select
+          defaultValue={queries.category}
+          name="category"
+          id="category"
+          onChange={categoryHandleChange}
+        >
+          <option value="">All categories</option>
           {categories.map((category, index) => {
             return (
               <option key={index} value={category.slug}>

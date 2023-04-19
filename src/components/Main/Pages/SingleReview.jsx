@@ -10,6 +10,7 @@ const SingleReview = ({
   isLoading,
   setIsLoading,
   currentUser,
+  reviewQueries,
 }) => {
   const { reviewId } = useParams();
   const [review, setReview] = useState({});
@@ -29,11 +30,23 @@ const SingleReview = ({
     <main>
       <Header setActiveNavbar={setActiveNavbar} />
       <h2>Review</h2>
-      <p onClick={handleOnClick}>
-        <Link className="green" to="/reviews">
-          Back to all reviews
-        </Link>
-      </p>
+      {!reviewQueries.category ? (
+        <p onClick={handleOnClick}>
+          <Link className="green" to="/reviews">
+            Back to category
+          </Link>
+        </p>
+      ) : (
+        <p onClick={handleOnClick}>
+          <Link
+            className="green"
+            to={`/categories/${reviewQueries.category}/reviews`}
+          >
+            Back to category
+          </Link>
+        </p>
+      )}
+
       {isLoading ? (
         <PixelLoader />
       ) : (

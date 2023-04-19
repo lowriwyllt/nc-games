@@ -10,8 +10,9 @@ const Reviews = ({
   isLoading,
   setIsLoading,
   currentUser,
+  queries,
+  setQueries,
 }) => {
-  const [queries, setQueries] = useState({});
   const { category_slug } = useParams();
 
   useEffect(() => {
