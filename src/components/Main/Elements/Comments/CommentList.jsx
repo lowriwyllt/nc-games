@@ -10,7 +10,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
   const [commentBody, setCommentBody] = useState("Comment...");
   const [err, setErr] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [disabledForm, setDisabledForm] = useState(false);
+  const [disabledForm, setDisabledForm] = useState(true);
   const [disabledSubmit, setdisabledSubmit] = useState(false);
 
   useEffect(() => {
@@ -65,6 +65,10 @@ const CommentList = ({ reviewId, currentUser, space }) => {
     }
   };
 
+  const handleAddCommentOnClick = () => {
+    setDisabledForm((currDisForm) => (currDisForm === true ? false : true));
+  };
+
   return (
     <div>
       <MyModal
@@ -104,7 +108,9 @@ const CommentList = ({ reviewId, currentUser, space }) => {
             {err ? <p>{err}</p> : null}
             <button disabled={disabledSubmit}>Submit</button>
           </form>
-        ) : null
+        ) : (
+          <button onClick={handleAddCommentOnClick}>Add a comment</button>
+        )
       ) : (
         <Link to={`/reviews/${reviewId}`} className="green">
           See all comments...
