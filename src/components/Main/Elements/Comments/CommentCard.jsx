@@ -1,11 +1,14 @@
 import { useContext, useState } from "react";
 import * as api from "../../../../api";
 import { CurrentUserContext } from "../../../../contexts/CurrentUser";
+import MyModal from "../General/Modal";
 
 const CommentCard = ({ comment, setComments, setCurrReview }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const [addedVotes, setAddedVotes] = useState(0);
   const [err, setErr] = useState(null);
+  const [modalIsOpenDELETE, setIsOpenDELETE] = useState(false);
+
   const date = new Date(comment.created_at).toLocaleString();
 
   const votesHandleOnClick = (event) => {
@@ -18,12 +21,12 @@ const CommentCard = ({ comment, setComments, setCurrReview }) => {
   };
 
   const deleteHandleOnClick = () => {
+    setIsOpenDELETE(true);
     setErr(null);
     api
       .deleteComment(comment.comment_id)
       .then(() => {
         //takes the value of total comment on review down by one
-        console.log(setCurrReview);
         setCurrReview((nowCurrReview) => {
           return {
             ...nowCurrReview,
@@ -40,13 +43,20 @@ const CommentCard = ({ comment, setComments, setCurrReview }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
         setErr("something went wrong, try again later");
       });
   };
 
   return (
     <div className="commentCard">
+      <MyModal
+        modalIsOpen={modalIsOpenDELETE}
+        setIsOpen={setIsOpenDELETE}
+        contentLabel={"Comment Delete Modal"}
+        Content={() => {
+          return <p>Your comment has been deleted!</p>;
+        }}
+      />
       <p>
         <i>{comment.author}</i> commented at {date}
       </p>

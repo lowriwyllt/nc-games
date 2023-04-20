@@ -13,7 +13,6 @@ const CommentList = ({ reviewId, currentUser, space, setCurrReview }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [disabledForm, setDisabledForm] = useState(true);
   const [disabledSubmit, setdisabledSubmit] = useState(false);
-  console.log(setCurrReview);
 
   useEffect(() => {
     setIsLoading(true);
@@ -57,8 +56,16 @@ const CommentList = ({ reviewId, currentUser, space, setCurrReview }) => {
         .postCommentOfReview(reviewId, requestObj)
         .then((data) => {
           setComments([data, ...comments]);
+          //takes the value of total comment on review up by one
+          setCurrReview((nowCurrReview) => {
+            return {
+              ...nowCurrReview,
+              comment_count: nowCurrReview.comment_count + 1,
+            };
+          });
           setIsOpen(true);
           setDisabledForm(true);
+          setdisabledSubmit(false);
         })
         .catch(() => {
           setErr("something went wrong, try again later");
@@ -71,7 +78,6 @@ const CommentList = ({ reviewId, currentUser, space, setCurrReview }) => {
     setDisabledForm((currDisForm) => (currDisForm === true ? false : true));
   };
 
-  console.log(setCurrReview);
   return (
     <div>
       <MyModal
