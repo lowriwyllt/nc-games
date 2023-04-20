@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import * as api from "../../../../api";
 import { CurrentUserContext } from "../../../../contexts/CurrentUser";
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, setComments, setCurrReview }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const [addedVotes, setAddedVotes] = useState(0);
   const [err, setErr] = useState(null);
@@ -18,12 +18,31 @@ const CommentCard = ({ comment }) => {
   };
 
   const deleteHandleOnClick = () => {
-    //maybe need to make context for currentUser
-    //button should only be there if comment.author === currentUser
-    //then can make call to api etc
-    //then use filter to not render that one
-    console.log(comment.author);
-    setErr("something went wrong, try again later");
+    setErr(null);
+    api
+      .deleteComment(comment.comment_id)
+      .then(() => {
+        //takes the value of total comment on review down by one
+        console.log(setCurrReview);
+        setCurrReview((nowCurrReview) => {
+          return {
+            ...nowCurrReview,
+            comment_count: nowCurrReview.comment_count - 1,
+          };
+        });
+      })
+      .then(() => {
+        //Then set the array of comments to not include the one that we just deleted
+        setComments((currentCommentsArr) => {
+          return currentCommentsArr.filter(
+            (currCommentObj) => currCommentObj.comment_id !== comment.comment_id
+          );
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setErr("something went wrong, try again later");
+      });
   };
 
   return (
@@ -41,8 +60,9 @@ const CommentCard = ({ comment }) => {
       >
         <div className="pixelized--heart"></div>
       </button>
-      {}
-      <button onClick={deleteHandleOnClick}>Delete</button>
+      {comment.author === currentUser ? (
+        <button onClick={deleteHandleOnClick}>Delete</button>
+      ) : null}
       {err ? <p>{err}</p> : null}
     </div>
   );

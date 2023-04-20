@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import MyModal from "../General/Modal";
 import PixelLoader from "../General/PixelLoader";
 
-const CommentList = ({ reviewId, currentUser, space }) => {
+const CommentList = ({ reviewId, currentUser, space, setCurrReview }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [commentBody, setCommentBody] = useState("");
@@ -13,6 +13,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [disabledForm, setDisabledForm] = useState(true);
   const [disabledSubmit, setdisabledSubmit] = useState(false);
+  console.log(setCurrReview);
 
   useEffect(() => {
     setIsLoading(true);
@@ -55,7 +56,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
       api
         .postCommentOfReview(reviewId, requestObj)
         .then((data) => {
-          setComments([...comments, data]);
+          setComments([data, ...comments]);
           setIsOpen(true);
           setDisabledForm(true);
         })
@@ -70,6 +71,7 @@ const CommentList = ({ reviewId, currentUser, space }) => {
     setDisabledForm((currDisForm) => (currDisForm === true ? false : true));
   };
 
+  console.log(setCurrReview);
   return (
     <div>
       <MyModal
@@ -87,7 +89,14 @@ const CommentList = ({ reviewId, currentUser, space }) => {
       ) : (
         <div className="commentCards">
           {comments.map((comment) => {
-            return <CommentCard key={comment.comment_id} comment={comment} />;
+            return (
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+                setComments={setComments}
+                setCurrReview={setCurrReview}
+              />
+            );
           })}
         </div>
       )}

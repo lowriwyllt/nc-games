@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ActiveNavbarProvider } from "./contexts/ActiveNavbar";
+import { CurrentUserProvider } from "./contexts/CurrentUser";
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
-    <ActiveNavbarProvider>
-      <App />
-    </ActiveNavbarProvider>
+    <CurrentUserProvider>
+      <ActiveNavbarProvider>
+        <App />
+      </ActiveNavbarProvider>
+    </CurrentUserProvider>
   </BrowserRouter>
   // </React.StrictMode>
 );
