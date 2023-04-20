@@ -25,7 +25,6 @@ const ReviewsList = ({
   };
 
   useEffect(() => {
-    console.log(queries);
     setIsLoading(true);
     api
       .fetchCategories()
@@ -97,7 +96,7 @@ const ReviewsList = ({
         navigate(`/categories/${event.target.value}/reviews`);
       }
     } else {
-      const newOrder = queries.order === "desc" ? "asc" : "desc";
+      const newOrder = event.target.checked ? "asc" : "desc";
       if (queries.category === "") {
         navigate(`/reviews?sort_by=${queries.sortBy}&order=${newOrder}`);
       } else {
@@ -126,7 +125,12 @@ const ReviewsList = ({
             );
           })}
         </select>
-        <select name="sortby" id="sortBy" onChange={sortbyHandleChange}>
+        <select
+          name="sortby"
+          id="sortBy"
+          onChange={sortbyHandleChange}
+          value={queries.sortBy}
+        >
           {Object.keys(sortByGreenList).map((sortByKey, index) => {
             return (
               <option key={index} value={sortByGreenList[sortByKey]}>
@@ -136,7 +140,11 @@ const ReviewsList = ({
           })}
         </select>
         <label className="switch">
-          <input type="checkbox" onChange={orderByHandleChange} />
+          <input
+            type="checkbox"
+            checked={queries.order === "desc" ? false : true}
+            onChange={orderByHandleChange}
+          />
           <span className="slider">
             <p>
               ASC <span className="clear">.</span>DESC

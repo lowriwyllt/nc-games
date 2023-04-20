@@ -16,25 +16,7 @@ const Reviews = ({
   const { category_slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // useEffect(() => {
-  //   console.log("this is run");
-  //   console.log("searchSort", searchParams.get("sort_by"));
-  //   const newSort = searchParams.get("sort_by")
-  //     ? searchParams.get("sort_by")
-  //     : "created_at";
-  //   console.log("newSort", newSort);
-  //   const newOrder = searchParams.get("order")
-  //     ? searchParams.get("order")
-  //     : "desc";
-  //   setQueries({
-  //     ...queries,
-  //     order: newOrder,
-  //     sortBy: newSort,
-  //   });
-  // }, [searchParams]);
-
   useEffect(() => {
-    console.log("searchSort", searchParams.get("sort_by"));
     const newSort = searchParams.get("sort_by")
       ? searchParams.get("sort_by")
       : "created_at";
