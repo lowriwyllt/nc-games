@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useContext } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar/Navbar";
@@ -7,37 +7,31 @@ import LandingPage from "./components/Main/LandingPage";
 import NoEntry from "./components/Main/NoEntry";
 import Reviews from "./components/Main/Pages/Reviews";
 import SingleReview from "./components/Main/Pages/SingleReview";
-import PixelLoader from "./components/Main/Elements/General/PixelLoader";
+import { ActiveNavbarContext } from "./contexts/ActiveNavbar";
 
 function App() {
-  const [activeNavbar, setActiveNavbar] = useState(false);
+  //Props
+  const { activeNavbar, setActiveNavbar } = useContext(ActiveNavbarContext);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
-  const [reviewQueries, setReviewQueries] = useState({ category: "" });
+  const [reviewQueries, setReviewQueries] = useState({
+    category: "",
+    order: "desc",
+    sortBy: "created_at",
+  });
 
-  let appClass = "App";
-  if (activeNavbar) {
-    appClass += " AppNav";
-  }
   return (
-    <div className={appClass}>
+    <div className={activeNavbar ? "App AppNav" : "App"}>
       <Routes>
-        <Route
-          path="/"
-          element={<LandingPage setActiveNavbar={setActiveNavbar} />}
-        />
-        <Route
-          path="/noEntry"
-          element={<NoEntry setActiveNavbar={setActiveNavbar} />}
-        />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/noEntry" element={<NoEntry />} />
         <Route
           path="/reviews"
           element={
             <Reviews
               isLoading={isLoading}
               setIsLoading={setIsLoading}
-              setActiveNavbar={setActiveNavbar}
               categories={categories}
               setCategories={setCategories}
               currentUser={currentUser}
@@ -52,7 +46,6 @@ function App() {
             <SingleReview
               isLoading={isLoading}
               setIsLoading={setIsLoading}
-              setActiveNavbar={setActiveNavbar}
               currentUser={currentUser}
               reviewQueries={reviewQueries}
             />
@@ -64,7 +57,6 @@ function App() {
             <Reviews
               isLoading={isLoading}
               setIsLoading={setIsLoading}
-              setActiveNavbar={setActiveNavbar}
               categories={categories}
               setCategories={setCategories}
               currentUser={currentUser}
@@ -74,7 +66,8 @@ function App() {
           }
         />
       </Routes>
-      <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
+      {/* On Every Page */}
+      <Navbar />
       <Footer />
     </div>
   );

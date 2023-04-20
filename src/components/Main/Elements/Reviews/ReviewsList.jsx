@@ -20,12 +20,11 @@ const ReviewsList = ({
 
   const sortByGreenList = {
     date: "created_at",
-    // "comment count":, - don't think I did this in backend
+    comments: "comment_count",
     votes: "votes",
   };
 
   useEffect(() => {
-    console.log(queries);
     setIsLoading(true);
     api
       .fetchCategories()
@@ -51,32 +50,72 @@ const ReviewsList = ({
 
   let navigate = useNavigate();
   const categoryHandleChange = (event) => {
-    if (event.target.value === "") {
-      navigate("/reviews");
+    if (queries.order === "desc" && queries.sortBy === "created_at") {
+      if (event.target.value === "") {
+        navigate("/reviews");
+      } else {
+        navigate(`/categories/${event.target.value}/reviews`);
+      }
     } else {
-      navigate(`/categories/${event.target.value}/reviews`);
+      if (event.target.value === "") {
+        navigate(`/reviews?sort_by=${queries.sortBy}&order=${queries.order}`);
+      } else {
+        navigate(
+          `/categories/${event.target.value}/reviews?sort_by=${queries.sortBy}&order=${queries.order}`
+        );
+      }
     }
   };
 
   const sortbyHandleChange = (event) => {
-    setQueries({ ...queries, sortBy: event.target.value });
+    if (queries.order === "desc" && event.target.value === "created_at") {
+      if (queries.category === "") {
+        navigate("/reviews");
+      } else {
+        navigate(`/categories/${event.target.value}/reviews`);
+      }
+    } else {
+      if (queries.category === "") {
+        navigate(
+          `/reviews?sort_by=${event.target.value}&order=${queries.order}`
+        );
+      } else {
+        navigate(
+          `/categories/${queries.category}/reviews?sort_by=${event.target.value}&order=${queries.order}`
+        );
+      }
+    }
   };
 
   const orderByHandleChange = (event) => {
-    setSortBy((currSortBy) => (currSortBy === "desc" ? "asc" : "desc"));
+    if (queries.order === "asc" && queries.sortBy === "created_at") {
+      //because in this case asc will change to desc
+      if (queries.category === "") {
+        navigate("/reviews");
+      } else {
+        navigate(`/categories/${event.target.value}/reviews`);
+      }
+    } else {
+      const newOrder = event.target.checked ? "asc" : "desc";
+      if (queries.category === "") {
+        navigate(`/reviews?sort_by=${queries.sortBy}&order=${newOrder}`);
+      } else {
+        navigate(
+          `/categories/${queries.category}/reviews?sort_by=${queries.sortBy}&order=${newOrder}`
+        );
+      }
+    }
   };
 
   return (
     <section id="reviewList">
       <form className="dropdown">
-        {console.log("defaultVal before :", queries.category)}
         <select
           value={queries.category}
           name="category"
           id="category"
           onChange={categoryHandleChange}
         >
-          {console.log("defaultVal", queries.category)}
           <option value="">All categories</option>
           {categories.map((category, index) => {
             return (
@@ -86,7 +125,12 @@ const ReviewsList = ({
             );
           })}
         </select>
-        <select name="sortby" id="sortBy" onChange={sortbyHandleChange}>
+        <select
+          name="sortby"
+          id="sortBy"
+          onChange={sortbyHandleChange}
+          value={queries.sortBy}
+        >
           {Object.keys(sortByGreenList).map((sortByKey, index) => {
             return (
               <option key={index} value={sortByGreenList[sortByKey]}>
@@ -96,47 +140,22 @@ const ReviewsList = ({
           })}
         </select>
         <label className="switch">
-          <input type="checkbox" onChange={orderByHandleChange} />
-          <span className="slider round"></span>
+          <input
+            type="checkbox"
+            checked={queries.order === "desc" ? false : true}
+            onChange={orderByHandleChange}
+          />
+          <span className="slider">
+            <p>
+              ASC <span className="clear">.</span>DESC
+            </p>
+          </span>
         </label>
       </form>
-      {/* <form className="dropdown">
-        {console.log("defaultVal before :", queries.category)}
-        <select
-          defaultValue={queries.category}
-          name="category"
-          id="category"
-          onChange={categoryHandleChange}
-        >
-          {console.log("defaultVal", queries.category)}
-          <option value="">All categories</option>
-          {categories.map((category, index) => {
-            return (
-              <option key={index} value={category.slug}>
-                {category.slug[0].toUpperCase() + category.slug.slice(1)}
-              </option>
-            );
-          })}
-        </select>
-        <select name="sortby" id="sortBy" onChange={sortbyHandleChange}>
-          {Object.keys(sortByGreenList).map((sortByKey, index) => {
-            return (
-              <option key={index} value={sortByGreenList[sortByKey]}>
-                {sortByKey[0].toUpperCase() + sortByKey.slice(1)}
-              </option>
-            );
-          })}
-        </select>
-        <label className="switch">
-          <input type="checkbox" onChange={orderByHandleChange} />
-          <span className="slider round"></span>
-        </label>
-      </form> */}
       {isLoading ? (
         <PixelLoader />
       ) : (
         <div>
-          {" "}
           <div className="reviewCards">
             {reviews.map((review) => {
               return (

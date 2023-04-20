@@ -1,24 +1,16 @@
+import { useContext } from "react";
 import MenuButton from "./MenuButton";
 import NavLinks from "./NavLinks";
+import { ActiveNavbarContext } from "../../contexts/ActiveNavbar";
 
-function Navbar({ activeNavbar, setActiveNavbar }) {
-  let navClass = "Navbar";
-  if (activeNavbar) {
-    navClass += " Navbar__ToggleShow";
-  }
+function Navbar() {
+  const { activeNavbar } = useContext(ActiveNavbarContext);
 
   return (
-    <div className={navClass}>
-      <MenuButton
-        activeNavbar={activeNavbar}
-        setActiveNavbar={setActiveNavbar}
-      />
+    <div className={activeNavbar ? "Navbar Navbar__ToggleShow" : "Navbar"}>
+      <MenuButton />
       <nav className="Navbar__Items">
-        <NavLinks
-          className="navLinks"
-          activeNavbar={activeNavbar}
-          setActiveNavbar={setActiveNavbar}
-        />
+        <NavLinks className="navLinks" />
       </nav>
     </div>
   );

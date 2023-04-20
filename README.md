@@ -1,6 +1,6 @@
-#NC Games
+# NC Games
 
-Deployed version:
+Deployed version: https://lowrigames.netlify.app/
 
 This project was to create a blogging system.
 
@@ -10,7 +10,10 @@ What can be done?
   - Filter them by category
   - Make them be sorted by date created, number of votes or number of comments
   - click on an individual review to see more details
-  - can add a vote
-  - can see 3 of the latest comments and click to see more
+  - can add a vote once
+  - can see 3 of the latest comments in a modal, and click to see more
 - See a single review at a time
-  - see the body of the post
+  - see the body of the post, as well as the rest of the details
+  - can add a vote once
+  - can see all comments
+  - can post a new comment

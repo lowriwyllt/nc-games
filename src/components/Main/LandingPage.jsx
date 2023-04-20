@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ActiveNavbarContext } from "../../contexts/ActiveNavbar";
 import Title from "./Title";
 
-const LandingPage = ({ setActiveNavbar }) => {
+const LandingPage = () => {
+  const { setActiveNavbar } = useContext(ActiveNavbarContext);
   const [continueValue, setContinueValue] = useState("");
   let navigate = useNavigate();
   const handleOnChange = (event) => {
