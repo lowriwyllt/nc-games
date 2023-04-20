@@ -25,6 +25,7 @@ const ReviewsList = ({
   };
 
   useEffect(() => {
+    console.log(queries);
     setIsLoading(true);
     api
       .fetchCategories()
@@ -147,7 +148,6 @@ const ReviewsList = ({
         <PixelLoader />
       ) : (
         <div>
-          {" "}
           <div className="reviewCards">
             {reviews.map((review) => {
               return (

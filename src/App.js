@@ -16,8 +16,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
   const [reviewQueries, setReviewQueries] = useState({
     category: "",
-    order: "desc",
-    sortBy: "created_at",
+    order: "desc", //"desc"
+    sortBy: "created_at", //"created_at"
   });
 
   let appClass = "App";
