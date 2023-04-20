@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import * as api from "../../../../api";
-import CommentList from "../Comments/CommentList";
+import CommentList from "../Comments/CommentArea";
 import { Link } from "react-router-dom";
 import MyModal from "../General/Modal";
 import { CurrentUserContext } from "../../../../contexts/CurrentUser";
 
 const ReviewCard = ({ review, space }) => {
+  //Props and Contexts
   const [err, setErr] = useState(null);
   const [addedVotes, setAddedVotes] = useState(0);
   const [isComments, setIsComments] = useState(false);
@@ -13,6 +14,7 @@ const ReviewCard = ({ review, space }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const [currReview, setCurrReview] = useState(review);
 
+  //Adds a vote
   const votesHandleOnClick = (event) => {
     setAddedVotes(1);
     setErr(null);
@@ -22,14 +24,17 @@ const ReviewCard = ({ review, space }) => {
     });
   };
 
+  //Opens comment list when clicked in modal
   const commentHandleOnClickSingle = (event) => {
     setIsOpen(true);
   };
 
+  //Opens and closes comment list in single Review
   const commentHandleOnClickList = () => {
     setIsComments(!isComments);
   };
 
+  //makes date readable
   const date = new Date(currReview.created_at).toLocaleString();
 
   return (
@@ -40,8 +45,13 @@ const ReviewCard = ({ review, space }) => {
         <p>
           <i>{currReview.owner}</i> reviewed at {date}
         </p>
-        {space === "single" ? <br /> : null}
-        {space === "single" ? <p>{currReview.review_body}</p> : null}
+        {/* If single review adds body */}
+        {space === "single" ? (
+          <>
+            <br />
+            <p>{currReview.review_body}</p>
+          </>
+        ) : null}
       </Link>
       <p>
         Votes: {currReview.votes + addedVotes} Comments:{" "}
@@ -54,10 +64,12 @@ const ReviewCard = ({ review, space }) => {
       >
         <div className="pixelized--heart"></div>
       </button>
+      {/* Shows error if error wtih  */}
       {err ? <p>{err}</p> : null}
 
       {space === "list" ? (
-        <div>
+        // Button called comments opens modal with comments in list of reviews
+        <>
           <button onClick={commentHandleOnClickSingle}>Comments</button>
           <MyModal
             modalIsOpen={modalIsOpen}
@@ -67,7 +79,6 @@ const ReviewCard = ({ review, space }) => {
               return (
                 <CommentList
                   reviewId={currReview.review_id}
-                  currentUser={currentUser}
                   space={space}
                   setCurrReview={setCurrReview}
                 />
@@ -75,19 +86,19 @@ const ReviewCard = ({ review, space }) => {
             }}
             id={"commentsModal"}
           />{" "}
-        </div>
+        </>
       ) : (
-        <div>
+        // button comments shows comments beneath
+        <>
           <button onClick={commentHandleOnClickList}>Comments</button>
           {isComments ? (
             <CommentList
               reviewId={currReview.review_id}
-              currentUser={currentUser}
               space={space}
               setCurrReview={setCurrReview}
             />
           ) : null}
-        </div>
+        </>
       )}
     </div>
   );
