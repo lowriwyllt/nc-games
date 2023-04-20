@@ -12,36 +12,20 @@ const Reviews = ({
   queries,
   setQueries,
 }) => {
+  //gets data from URL
   const { category_slug } = useParams();
   const [searchParams] = useSearchParams();
 
+  //add data from URL to queries
   useEffect(() => {
-    const newSort = searchParams.get("sort_by")
-      ? searchParams.get("sort_by")
-      : "created_at";
-    const newOrder = searchParams.get("order")
-      ? searchParams.get("order")
-      : "desc";
     setQueries({
       ...queries,
-      order: newOrder,
-      sortBy: newSort,
+      category: category_slug ? category_slug : "",
+      order: searchParams.get("order") ? searchParams.get("order") : "desc",
+      sortBy: searchParams.get("sort_by")
+        ? searchParams.get("sort_by")
+        : "created_at",
     });
-    if (category_slug) {
-      setQueries({
-        ...queries,
-        category: category_slug,
-        order: newOrder,
-        sortBy: newSort,
-      });
-    } else {
-      setQueries({
-        ...queries,
-        category: "",
-        order: newOrder,
-        sortBy: newSort,
-      });
-    }
   }, [category_slug, searchParams]);
 
   return (
@@ -51,7 +35,6 @@ const Reviews = ({
       <ReviewsList
         currentUser={currentUser}
         queries={queries}
-        setQueries={setQueries}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
         categories={categories}

@@ -4,8 +4,11 @@ import { ActiveNavbarContext } from "../../contexts/ActiveNavbar";
 import Title from "./Title";
 
 const LandingPage = () => {
+  //Props and context
   const { setActiveNavbar } = useContext(ActiveNavbarContext);
   const [continueValue, setContinueValue] = useState("");
+
+  //handles when someone types in "y" or "n"
   let navigate = useNavigate();
   const handleOnChange = (event) => {
     if (event.nativeEvent.data.toLowerCase() === "y") {
@@ -22,6 +25,7 @@ const LandingPage = () => {
       setActiveNavbar(false);
     }
   };
+
   return (
     <main className="centerGame">
       <Title setActiveNavbar={setActiveNavbar} />

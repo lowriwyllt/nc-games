@@ -9,14 +9,12 @@ const ReviewsList = ({
   setCategories,
   isLoading,
   setIsLoading,
-  setQueries,
   queries,
   currentUser,
 }) => {
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [pageCount, setPageCount] = useState(10);
-  const [sortBy, setSortBy] = useState("created_at");
 
   const sortByGreenList = {
     date: "created_at",

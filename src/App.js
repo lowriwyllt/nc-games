@@ -10,7 +10,7 @@ import SingleReview from "./components/Main/Pages/SingleReview";
 import { ActiveNavbarContext } from "./contexts/ActiveNavbar";
 
 function App() {
-  //Props
+  //Props and context
   const { activeNavbar, setActiveNavbar } = useContext(ActiveNavbarContext);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
