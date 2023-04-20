@@ -8,7 +8,6 @@ const Reviews = ({
   setCategories,
   isLoading,
   setIsLoading,
-  currentUser,
   queries,
   setQueries,
 }) => {
@@ -33,7 +32,6 @@ const Reviews = ({
       <Header />
       <h2>Reviews</h2>
       <ReviewsList
-        currentUser={currentUser}
         queries={queries}
         isLoading={isLoading}
         setIsLoading={setIsLoading}

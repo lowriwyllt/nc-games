@@ -14,7 +14,7 @@ function App() {
   const { activeNavbar, setActiveNavbar } = useContext(ActiveNavbarContext);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
+  // const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
   const [reviewQueries, setReviewQueries] = useState({
     category: "",
     order: "desc",
@@ -34,7 +34,6 @@ function App() {
               setIsLoading={setIsLoading}
               categories={categories}
               setCategories={setCategories}
-              currentUser={currentUser}
               queries={reviewQueries}
               setQueries={setReviewQueries}
             />
@@ -46,7 +45,6 @@ function App() {
             <SingleReview
               isLoading={isLoading}
               setIsLoading={setIsLoading}
-              currentUser={currentUser}
               reviewQueries={reviewQueries}
             />
           }
@@ -59,7 +57,6 @@ function App() {
               setIsLoading={setIsLoading}
               categories={categories}
               setCategories={setCategories}
-              currentUser={currentUser}
               queries={reviewQueries}
               setQueries={setReviewQueries}
             />
