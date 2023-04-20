@@ -1,17 +1,18 @@
 import * as api from "../../../api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../Elements/General/Header";
 import ReviewCard from "../Elements/Reviews/ReviewCard";
 import { Link, useParams } from "react-router-dom";
 import PixelLoader from "../Elements/General/PixelLoader";
+import { ActiveNavbarContext } from "../../../contexts/ActiveNavbar";
 
 const SingleReview = ({
-  setActiveNavbar,
   isLoading,
   setIsLoading,
   currentUser,
   reviewQueries,
 }) => {
+  const { setActiveNavbar } = useContext(ActiveNavbarContext);
   const { reviewId } = useParams();
   const [review, setReview] = useState({});
   useEffect(() => {
@@ -28,7 +29,7 @@ const SingleReview = ({
 
   return (
     <main>
-      <Header setActiveNavbar={setActiveNavbar} />
+      <Header />
       <h2>Review</h2>
       {!reviewQueries.category ? (
         <p onClick={handleOnClick}>

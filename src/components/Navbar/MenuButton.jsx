@@ -1,4 +1,8 @@
-function MenuButton({ activeNavbar, setActiveNavbar }) {
+import { useContext } from "react";
+import { ActiveNavbarContext } from "../../contexts/ActiveNavbar";
+
+function MenuButton() {
+  const { activeNavbar, setActiveNavbar } = useContext(ActiveNavbarContext);
   const handleClick = () => {
     setActiveNavbar(!activeNavbar);
   };

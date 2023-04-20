@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import Header from "../Elements/General/Header";
 import ReviewsList from "../Elements/Reviews/ReviewsList";
 
 const Reviews = ({
-  setActiveNavbar,
   categories,
   setCategories,
   isLoading,
@@ -14,7 +13,7 @@ const Reviews = ({
   setQueries,
 }) => {
   const { category_slug } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const newSort = searchParams.get("sort_by")
@@ -47,7 +46,7 @@ const Reviews = ({
 
   return (
     <main>
-      <Header setActiveNavbar={setActiveNavbar} />
+      <Header />
       <h2>Reviews</h2>
       <ReviewsList
         currentUser={currentUser}
