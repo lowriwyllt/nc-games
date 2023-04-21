@@ -82,3 +82,7 @@ export const postCommentOfReview = (reviewId, commentToBePosted) => {
     .post(`/reviews/${reviewId}/comments`, commentToBePosted)
     .then(({ data }) => data.comment);
 };
+
+export const deleteComment = (commentId) => {
+  return gamesApi.delete(`/comments/${commentId}`);
+};

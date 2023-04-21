@@ -404,5 +404,10 @@ input:checked + .slider:before {
 
 .dropdown {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin: 15px;
+}
+
+#sortOrderBy {
+  display: flex;
 }

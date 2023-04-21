@@ -1,9 +1,9 @@
 import "./PixelLoader.css";
 
-const PixelLoader = () => {
+const PixelLoader = ({ loadingMessage }) => {
   return (
-    <div>
-      <p>Loading...</p>
+    <div className="pixelLoader">
+      <p>{loadingMessage}</p>
       <div id="loader"></div>
     </div>
   );

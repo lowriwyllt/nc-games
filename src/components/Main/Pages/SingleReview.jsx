@@ -49,7 +49,7 @@ const SingleReview = ({
       )}
 
       {isLoading ? (
-        <PixelLoader />
+        <PixelLoader loadingMessage={"Loading..."} />
       ) : (
         <div className="singleReview">
           <ReviewCard

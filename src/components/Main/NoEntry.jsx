@@ -6,14 +6,11 @@ import { ActiveNavbarContext } from "../../contexts/ActiveNavbar";
 const NoEntry = () => {
   const { setActiveNavbar } = useContext(ActiveNavbarContext);
 
-  const handleOnClick = () => {
-    setActiveNavbar(false);
-  };
   return (
     <main className="centerGame">
       <Title setActiveNavbar={setActiveNavbar} />
       <p>{"You decided not to enter :("}</p>
-      <p onClick={handleOnClick}>
+      <p onClick={() => setActiveNavbar(false)}>
         <Link className="green" to="/">
           Back to Landing Page...
         </Link>
