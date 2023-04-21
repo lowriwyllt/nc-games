@@ -11,12 +11,9 @@ const CommentArea = ({ reviewId, space, setCurrReview }) => {
   //Props and Contexts
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [commentBody, setCommentBody] = useState("");
-  // const [err, setErr] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [disabledForm, setDisabledForm] = useState(true);
-  // const [disabledSubmit, setdisabledSubmit] = useState(false);
-
+  const [modalIsOpenDELETE, setIsOpenDELETE] = useState(false);
   //Loads 3 comments if in list space and 10 if in single view
   useEffect(() => {
     setIsLoading(true);
@@ -33,46 +30,6 @@ const CommentArea = ({ reviewId, space, setCurrReview }) => {
     }
   }, []);
 
-  //As typing in comment form box update commentBody
-  // const handleOnChange = (event) => {
-  //   setCommentBody(event.target.value);
-  // };
-
-  // const handleOnSubmit = (event) => {
-  //   setdisabledSubmit(true);
-  //   setCommentBody("");
-  //   event.preventDefault();
-  //   setErr(null);
-  //   const requestObj = {
-  //     username: currentUser,
-  //     body: event.target.commentBody.value,
-  //   };
-  //   if (!requestObj.body) {
-  //     setErr("Can't post an empty comment!");
-  //     setdisabledSubmit(false);
-  //   } else {
-  //     api
-  //       .postCommentOfReview(reviewId, requestObj)
-  //       .then((data) => {
-  //         setComments([data, ...comments]);
-  //         //takes the value of total comment on review up by one
-  //         setCurrReview((nowCurrReview) => {
-  //           return {
-  //             ...nowCurrReview,
-  //             comment_count: nowCurrReview.comment_count + 1,
-  //           };
-  //         });
-  //         setIsOpen(true);
-  //         setDisabledForm(true);
-  //         setdisabledSubmit(false);
-  //       })
-  //       .catch(() => {
-  //         setErr("something went wrong, try again later");
-  //         setdisabledSubmit(false);
-  //       });
-  //   }
-  // };
-
   return (
     <div>
       {/* Modal will pop up after you submit a comment */}
@@ -82,6 +39,14 @@ const CommentArea = ({ reviewId, space, setCurrReview }) => {
         contentLabel={"Comment Modal"}
         Content={() => {
           return <p>Your comment has been submitted!</p>;
+        }}
+      />
+      <MyModal
+        modalIsOpen={modalIsOpenDELETE}
+        setIsOpen={setIsOpenDELETE}
+        contentLabel={"Comment Delete Modal"}
+        Content={() => {
+          return <p>Your comment has been deleted!</p>;
         }}
       />
       {space === "single" ? (
@@ -116,6 +81,7 @@ const CommentArea = ({ reviewId, space, setCurrReview }) => {
       ) : (
         //if not loading show comments
         <CommentList
+          setIsOpenDELETE={setIsOpenDELETE}
           comments={comments}
           setComments={setComments}
           setCurrReview={setCurrReview}

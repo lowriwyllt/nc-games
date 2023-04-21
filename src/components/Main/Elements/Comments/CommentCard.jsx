@@ -33,8 +33,12 @@ const CommentCard = ({
     api
       .deleteComment(comment.comment_id)
       .then(() => {
+        setIsOpenDELETE(true);
+      })
+      .then(() => {
         //takes the value of total comment on review down by one
         setCurrReview((nowCurrReview) => {
+          //opens modal
           return {
             ...nowCurrReview,
             comment_count: nowCurrReview.comment_count - 1,
@@ -42,8 +46,6 @@ const CommentCard = ({
         });
       })
       .then(() => {
-        //opens modal
-        setIsOpenDELETE(true);
         //Then set the array of comments to not include the one that we just deleted
         setComments((currentCommentsArr) => {
           return currentCommentsArr.filter(
