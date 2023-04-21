@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import * as api from "../../../../api";
 import { CurrentUserContext } from "../../../../contexts/CurrentUser";
-import MyModal from "../General/Modal";
 import PixelLoader from "../General/PixelLoader";
+import { AllUsersContext } from "../../../../contexts/AllUsers";
 
 const CommentCard = ({
   comment,
@@ -15,6 +15,7 @@ const CommentCard = ({
   const [addedVotes, setAddedVotes] = useState(0);
   const [err, setErr] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { allUsers } = useContext(AllUsersContext);
 
   //Makes date readable
   const date = new Date(comment.created_at).toLocaleString();
@@ -61,12 +62,24 @@ const CommentCard = ({
       });
   };
 
+  let imgAvatar;
+  for (let i = 0; i < allUsers.length; i++) {
+    if (comment.author === allUsers[i].username) {
+      imgAvatar = allUsers[i].avatar_url;
+    }
+  }
+
   return (
     <div className="commentCard">
       {isLoading ? (
         <PixelLoader loadingMessage={"Deleting comment..."} />
       ) : (
         <>
+          <img
+            className="icon"
+            src={imgAvatar}
+            alt={`${comment.author} avatar`}
+          />
           <p>
             <i>{comment.author}</i> commented at {date}
           </p>
@@ -77,10 +90,11 @@ const CommentCard = ({
             className="pixel-block"
             onClick={votesHandleOnClick}
             disabled={addedVotes === 1}
+            aria-label="add vote to comment"
           >
             <div className="pixelized--heart"></div>
           </button>
-          {comment.author === currentUser ? (
+          {comment.author === currentUser.username ? (
             <button onClick={deleteHandleOnClick}>Delete</button>
           ) : null}
           {err ? <p>{err}</p> : null}

@@ -24,7 +24,7 @@ const NewCommentForm = ({
     event.preventDefault();
     setErr(null);
     const requestObj = {
-      username: currentUser,
+      username: currentUser.username,
       body: event.target.commentBody.value,
     };
 
@@ -58,7 +58,7 @@ const NewCommentForm = ({
 
   return (
     <form className="commentCard" onSubmit={handleOnSubmit}>
-      <p>{currentUser}</p>
+      <p>{currentUser.username}</p>
       <br />
       <label htmlFor="commentBody">New comment...</label>
       <br />

@@ -6,13 +6,10 @@ import { Link, useParams } from "react-router-dom";
 import PixelLoader from "../Elements/General/PixelLoader";
 import { ActiveNavbarContext } from "../../../contexts/ActiveNavbar";
 import ErrorPage from "../ErrorPage";
+import { CurrentUserContext } from "../../../contexts/CurrentUser";
 
-const SingleReview = ({
-  isLoading,
-  setIsLoading,
-  currentUser,
-  reviewQueries,
-}) => {
+const SingleReview = ({ isLoading, setIsLoading, reviewQueries }) => {
+  const { currentUser } = useContext(CurrentUserContext);
   const { setActiveNavbar } = useContext(ActiveNavbarContext);
   const { reviewId } = useParams();
   const [review, setReview] = useState({});
@@ -70,7 +67,7 @@ const SingleReview = ({
           <ReviewCard
             review={review}
             space={"single"}
-            currentUser={currentUser}
+            currentUser={currentUser.username}
           />
         </div>
       )}

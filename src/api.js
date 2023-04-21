@@ -86,3 +86,7 @@ export const postCommentOfReview = (reviewId, commentToBePosted) => {
 export const deleteComment = (commentId) => {
   return gamesApi.delete(`/comments/${commentId}`);
 };
+
+export const fetchUsers = () => {
+  return gamesApi.get(`/users`).then(({ data }) => data.users);
+};

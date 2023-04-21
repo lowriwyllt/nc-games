@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Title from "./Title";
 import { useContext } from "react";
 import { ActiveNavbarContext } from "../../contexts/ActiveNavbar";
 
@@ -8,7 +7,7 @@ const NoEntry = () => {
 
   return (
     <main className="centerGame">
-      <Title setActiveNavbar={setActiveNavbar} />
+      <h1>NC Games</h1>
       <p>{"You decided not to enter :("}</p>
       <p onClick={() => setActiveNavbar(false)}>
         <Link className="green" to="/">

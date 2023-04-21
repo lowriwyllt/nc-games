@@ -9,10 +9,11 @@ import Reviews from "./components/Main/Pages/Reviews";
 import SingleReview from "./components/Main/Pages/SingleReview";
 import { ActiveNavbarContext } from "./contexts/ActiveNavbar";
 import ErrorPage from "./components/Main/ErrorPage";
+import Account from "./components/Main/Pages/Account";
 
 function App() {
   //Props and context
-  const { activeNavbar, setActiveNavbar } = useContext(ActiveNavbarContext);
+  const { activeNavbar } = useContext(ActiveNavbarContext);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [reviewQueries, setReviewQueries] = useState({
@@ -62,6 +63,7 @@ function App() {
             />
           }
         />
+        <Route path="/account" element={<Account />} />
         <Route
           path="*"
           element={<ErrorPage errCode={404} errMsg={"Page not found"} />}

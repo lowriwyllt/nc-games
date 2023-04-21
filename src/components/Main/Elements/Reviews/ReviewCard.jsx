@@ -3,7 +3,7 @@ import * as api from "../../../../api";
 import CommentList from "../Comments/CommentArea";
 import { Link } from "react-router-dom";
 import MyModal from "../General/Modal";
-import { CurrentUserContext } from "../../../../contexts/CurrentUser";
+import { AllUsersContext } from "../../../../contexts/AllUsers";
 
 const ReviewCard = ({ review, space }) => {
   //Props and Contexts
@@ -11,8 +11,8 @@ const ReviewCard = ({ review, space }) => {
   const [addedVotes, setAddedVotes] = useState(0);
   const [isComments, setIsComments] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const { currentUser } = useContext(CurrentUserContext);
   const [currReview, setCurrReview] = useState(review);
+  const { allUsers } = useContext(AllUsersContext);
 
   //Adds a vote
   const votesHandleOnClick = (event) => {
@@ -37,11 +37,27 @@ const ReviewCard = ({ review, space }) => {
   //makes date readable
   const date = new Date(currReview.created_at).toLocaleString();
 
+  let imgAvatar;
+  for (let i = 0; i < allUsers.length; i++) {
+    if (currReview.owner === allUsers[i].username) {
+      imgAvatar = allUsers[i].avatar_url;
+    }
+  }
+
   return (
     <div className="reviewCard">
       <Link to={`/reviews/${currReview.review_id}`} className="reviewCardLink">
         <h3>{currReview.title}</h3>
-        <img src={currReview.review_img_url} alt={currReview.title} />
+        <img
+          className="reviewImg"
+          src={currReview.review_img_url}
+          alt={currReview.title}
+        />
+        <img
+          className="icon"
+          src={imgAvatar}
+          alt={`${currReview.owner} avatar`}
+        />
         <p>
           <i>{currReview.owner}</i> reviewed at {date}
         </p>
@@ -61,6 +77,7 @@ const ReviewCard = ({ review, space }) => {
         className="pixel-block"
         onClick={votesHandleOnClick}
         disabled={addedVotes === 1}
+        aria-label="add vote to review"
       >
         <div className="pixelized--heart"></div>
       </button>

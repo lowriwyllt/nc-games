@@ -172,6 +172,52 @@ header {
   margin: 10px;
 }
 
+#user_link {
+  display: grid;
+  grid-template:
+    "UserName UserIcon" auto
+    "UserUserName UserIcon" auto / 1fr fit-content(200px);
+}
+
+#UserName {
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  grid-area: UserName;
+}
+
+#UserUserName {
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+  grid-area: UserUserName;
+}
+
+#UserAvatar {
+  grid-area: UserIcon;
+  height: 88px;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.UserAvatarAccount {
+  width: 70%;
+}
+
+.account {
+  width: 30%;
+}
+
 button {
   font-family: "Roboto Mono", monospace;
   color: #ffffff;
@@ -225,13 +271,13 @@ select {
   margin: 5px 2px;
 }
 
-.reviewCards .reviewCard img {
+.reviewCards .reviewCard .reviewImg {
   width: 90%;
   display: block;
   margin: 10px auto;
 }
 
-.singleReview .reviewCard img {
+.singleReview .reviewCard .reviewImg {
   width: min(90%, 400px);
 }
 
