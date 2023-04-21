@@ -27,32 +27,28 @@ const NewCommentForm = ({
       username: currentUser,
       body: event.target.commentBody.value,
     };
-    if (!requestObj.body) {
-      setErr("Can't post an empty comment!");
-      setdisabledSubmit(false);
-    } else {
-      api
-        .postCommentOfReview(reviewId, requestObj)
-        .then((data) => {
-          setComments([data, ...comments]);
-          //takes the value of total comment on review up by one
-          setCurrReview((nowCurrReview) => {
-            return {
-              ...nowCurrReview,
-              comment_count: nowCurrReview.comment_count + 1,
-            };
-          });
-          setIsOpen(true);
-          setDisabledForm(true);
-          setdisabledSubmit(false);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setErr("something went wrong, try again later");
-          setdisabledSubmit(false);
-          setIsLoading(false);
+
+    api
+      .postCommentOfReview(reviewId, requestObj)
+      .then((data) => {
+        setComments([data, ...comments]);
+        //takes the value of total comment on review up by one
+        setCurrReview((nowCurrReview) => {
+          return {
+            ...nowCurrReview,
+            comment_count: nowCurrReview.comment_count + 1,
+          };
         });
-    }
+        setIsOpen(true);
+        setDisabledForm(true);
+        setdisabledSubmit(false);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setErr("something went wrong, try again later");
+        setdisabledSubmit(false);
+        setIsLoading(false);
+      });
   };
 
   //As typing in comment form box update commentBody
@@ -71,6 +67,7 @@ const NewCommentForm = ({
       ) : (
         <div className="grow-wrap">
           <textarea
+            required
             id="commentBody"
             name="commentBody"
             placeholder="comment..."
