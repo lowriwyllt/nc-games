@@ -72,47 +72,61 @@ const QueriesFormReview = ({ queries, categories }) => {
 
   return (
     <form className="dropdown">
-      <select
-        value={queries.category}
-        name="category"
-        id="category"
-        onChange={categoryHandleChange}
-      >
-        <option value="">All categories</option>
-        {categories.map((category, index) => {
-          return (
-            <option key={index} value={category.slug}>
-              {category.slug[0].toUpperCase() + category.slug.slice(1)}
-            </option>
-          );
-        })}
-      </select>
-      <select
-        name="sortby"
-        id="sortBy"
-        onChange={sortbyHandleChange}
-        value={queries.sortBy}
-      >
-        {Object.keys(sortByGreenList).map((sortByKey, index) => {
-          return (
-            <option key={index} value={sortByGreenList[sortByKey]}>
-              {sortByKey[0].toUpperCase() + sortByKey.slice(1)}
-            </option>
-          );
-        })}
-      </select>
-      <label className="switch">
-        <input
-          type="checkbox"
-          checked={queries.order === "desc" ? false : true}
-          onChange={orderByHandleChange}
-        />
-        <span className="slider">
-          <p>
-            ASC <span className="clear">.</span>DESC
-          </p>
-        </span>
-      </label>
+      <div id="filterByCategory">
+        <label htmlFor="category">Filter by:</label>
+        <br />
+        <select
+          value={queries.category}
+          name="category"
+          id="category"
+          onChange={categoryHandleChange}
+        >
+          <option value="">All categories</option>
+          {categories.map((category, index) => {
+            return (
+              <option key={index} value={category.slug}>
+                {category.slug[0].toUpperCase() + category.slug.slice(1)}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div id="sortOrderBy">
+        <div>
+          <label htmlFor="sortBy">Sort by:</label> <br />
+          <select
+            name="sortby"
+            id="sortBy"
+            onChange={sortbyHandleChange}
+            value={queries.sortBy}
+          >
+            {Object.keys(sortByGreenList).map((sortByKey, index) => {
+              return (
+                <option key={index} value={sortByGreenList[sortByKey]}>
+                  {sortByKey[0].toUpperCase() + sortByKey.slice(1)}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="orderBy">Order by:</label>
+          <br />
+          <label className="switch">
+            <input
+              type="checkbox"
+              id="orderBy"
+              checked={queries.order === "desc" ? false : true}
+              onChange={orderByHandleChange}
+            />
+            <span className="slider">
+              <p>
+                ASC <span className="clear">.</span>DESC
+              </p>
+            </span>
+          </label>
+        </div>
+      </div>
     </form>
   );
 };
