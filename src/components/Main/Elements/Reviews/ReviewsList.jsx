@@ -47,6 +47,8 @@ const ReviewsList = ({
             setQueries({
               ...queries,
               category: "",
+              order: "desc",
+              sortBy: "created_at",
             });
             setIsLoading(false);
             setErr({
