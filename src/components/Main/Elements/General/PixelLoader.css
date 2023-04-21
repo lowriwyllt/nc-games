@@ -10,6 +10,10 @@
   margin: 100px auto;
 }
 
+.pixelLoader {
+  text-align: center;
+}
+
 @keyframes spin {
   0% {
     box-shadow: 0px -30px var(--brightGreen), 10px -30px var(--brightGreen),

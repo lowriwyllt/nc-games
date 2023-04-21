@@ -64,7 +64,7 @@ const CommentCard = ({
   return (
     <div className="commentCard">
       {isLoading ? (
-        <PixelLoader />
+        <PixelLoader loadingMessage={"Deleting comment..."} />
       ) : (
         <>
           <p>

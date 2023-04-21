@@ -74,7 +74,7 @@ const CommentArea = ({ reviewId, space, setCurrReview }) => {
       ) : null}
       {isLoading ? (
         // if loading display loader
-        <PixelLoader />
+        <PixelLoader loadingMessage={"Loading..."} />
       ) : comments.length === 0 ? (
         // if not loading and no comments display text
         <p>No comment yet...</p>

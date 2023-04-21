@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../../../contexts/CurrentUser";
 import * as api from "../../../../api";
+import PixelLoader from "../General/PixelLoader";
 
 const NewCommentForm = ({
   reviewId,
@@ -14,9 +15,11 @@ const NewCommentForm = ({
   const [err, setErr] = useState(null);
   const [disabledSubmit, setdisabledSubmit] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnSubmit = (event) => {
     setdisabledSubmit(true);
+    setIsLoading(true);
     setCommentBody("");
     event.preventDefault();
     setErr(null);
@@ -42,10 +45,12 @@ const NewCommentForm = ({
           setIsOpen(true);
           setDisabledForm(true);
           setdisabledSubmit(false);
+          setIsLoading(false);
         })
         .catch(() => {
           setErr("something went wrong, try again later");
           setdisabledSubmit(false);
+          setIsLoading(false);
         });
     }
   };
@@ -61,15 +66,19 @@ const NewCommentForm = ({
       <br />
       <label htmlFor="commentBody">New comment...</label>
       <br />
-      <div className="grow-wrap">
-        <textarea
-          id="commentBody"
-          name="commentBody"
-          placeholder="comment..."
-          value={commentBody}
-          onChange={handleOnChange}
-        />
-      </div>
+      {isLoading ? (
+        <PixelLoader loadingMessage={"Posting your comment..."} />
+      ) : (
+        <div className="grow-wrap">
+          <textarea
+            id="commentBody"
+            name="commentBody"
+            placeholder="comment..."
+            value={commentBody}
+            onChange={handleOnChange}
+          />
+        </div>
+      )}
       <br />
       {err ? <p>{err}</p> : null}
       <button disabled={disabledSubmit}>Submit</button>

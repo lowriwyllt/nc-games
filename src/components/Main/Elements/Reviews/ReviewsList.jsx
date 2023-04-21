@@ -47,7 +47,7 @@ const ReviewsList = ({
       <QueriesFormReview queries={queries} categories={categories} />
       {isLoading ? (
         //if loading show loader
-        <PixelLoader />
+        <PixelLoader loadingMessage={"Loading..."} />
       ) : (
         //adds all reviews in a different card each
         <div>

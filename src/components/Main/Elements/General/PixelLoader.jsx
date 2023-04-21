@@ -1,11 +1,11 @@
 import "./PixelLoader.css";
 
-const PixelLoader = () => {
+const PixelLoader = ({ loadingMessage }) => {
   return (
-    <>
-      <p>Loading...</p>
+    <div className="pixelLoader">
+      <p>{loadingMessage}</p>
       <div id="loader"></div>
-    </>
+    </div>
   );
 };
 
