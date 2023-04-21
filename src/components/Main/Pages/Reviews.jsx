@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import Header from "../Elements/General/Header";
 import ReviewsList from "../Elements/Reviews/ReviewsList";
+import ErrorPage from "../ErrorPage";
 
 const Reviews = ({
   categories,
@@ -14,6 +15,7 @@ const Reviews = ({
   //gets data from URL
   const { category_slug } = useParams();
   const [searchParams] = useSearchParams();
+  const [err, setErr] = useState(null);
 
   //add data from URL to queries
   useEffect(() => {
@@ -27,16 +29,21 @@ const Reviews = ({
     });
   }, [category_slug, searchParams]);
 
+  if (err) {
+    return <ErrorPage errCode={err.errCode} errMsg={err.errMsg} />;
+  }
   return (
     <main>
       <Header />
       <h2>Reviews</h2>
       <ReviewsList
+        setErr={setErr}
         queries={queries}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
         categories={categories}
         setCategories={setCategories}
+        setQueries={setQueries}
       />
     </main>
   );

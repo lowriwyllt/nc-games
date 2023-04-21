@@ -8,13 +8,13 @@ import NoEntry from "./components/Main/NoEntry";
 import Reviews from "./components/Main/Pages/Reviews";
 import SingleReview from "./components/Main/Pages/SingleReview";
 import { ActiveNavbarContext } from "./contexts/ActiveNavbar";
+import ErrorPage from "./components/Main/ErrorPage";
 
 function App() {
   //Props and context
   const { activeNavbar, setActiveNavbar } = useContext(ActiveNavbarContext);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  // const [currentUser, setCurrentUser] = useState("tickle122"); //This is hardcoded for now
   const [reviewQueries, setReviewQueries] = useState({
     category: "",
     order: "desc",
@@ -61,6 +61,10 @@ function App() {
               setQueries={setReviewQueries}
             />
           }
+        />
+        <Route
+          path="*"
+          element={<ErrorPage errCode={404} errMsg={"Page not found"} />}
         />
       </Routes>
       {/* On Every Page */}
