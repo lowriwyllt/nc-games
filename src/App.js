@@ -20,6 +20,8 @@ function App() {
     category: "",
     order: "desc",
     sortBy: "created_at",
+    limit: 10,
+    page: 1,
   });
 
   return (

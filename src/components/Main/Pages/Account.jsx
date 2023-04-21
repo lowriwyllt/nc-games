@@ -5,7 +5,7 @@ import UsersList from "../Elements/Users/UsersList";
 import UserCard from "../Elements/Users/UserCard";
 
 const Account = () => {
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   if (currentUser.username) {
     return (

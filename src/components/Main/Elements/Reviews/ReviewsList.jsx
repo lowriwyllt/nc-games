@@ -17,8 +17,7 @@ const ReviewsList = ({
   //State and Contexts
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
-
-  // const [pageCount, setPageCount] = useState(10); will be needed when I add pages
+  const [pageCount, setPageCount] = useState(0); //will be needed when I add pages
 
   //gets data about categories and reviews
   useEffect(() => {
@@ -41,6 +40,7 @@ const ReviewsList = ({
           .then((data) => {
             setReviews(data.reviews);
             setTotalCount(data.total_count);
+            setPageCount(Math.ceil(data.total_count / queries.limit));
             setIsLoading(false);
           })
           .catch((CurrErr) => {
@@ -66,15 +66,30 @@ const ReviewsList = ({
       });
   }, [queries]);
 
+  const pagesArr = Array.from({ length: pageCount }, (_, i) => i + 1);
+
+  const pageHandleOnClick = (event) => {
+    setQueries((currentQueries) => {
+      return { ...currentQueries, page: event.target.innerText };
+    });
+  };
+
   return (
     <section id="reviewList">
-      <QueriesFormReview queries={queries} categories={categories} />
+      <QueriesFormReview
+        queries={queries}
+        categories={categories}
+        setQueries={setQueries}
+      />
       {isLoading ? (
         //if loading show loader
         <PixelLoader loadingMessage={"Loading..."} />
       ) : (
         //adds all reviews in a different card each
         <div>
+          <p>
+            Seeing {reviews.length} of {totalCount} reviews
+          </p>
           <div className="reviewCards">
             {reviews.map((review) => {
               return (
@@ -88,7 +103,15 @@ const ReviewsList = ({
           </div>
           {/* Pages for when I add multiple pages */}
           <p>Pages</p>
-          <p>Page numbers will go here</p>
+          {pagesArr.map((pageNum) => (
+            <p
+              key={pageNum}
+              onClick={pageHandleOnClick}
+              className={pageNum == queries.page ? "green" : ""}
+            >
+              {pageNum}
+            </p>
+          ))}
         </div>
       )}
     </section>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const QueriesFormReview = ({ queries, categories }) => {
+const QueriesFormReview = ({ queries, categories, setQueries }) => {
   //Allowed to sort by
   const sortByGreenList = {
     date: "created_at",
@@ -13,14 +13,26 @@ const QueriesFormReview = ({ queries, categories }) => {
   const categoryHandleChange = (event) => {
     if (queries.order === "desc" && queries.sortBy === "created_at") {
       if (event.target.value === "") {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate("/reviews");
       } else {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate(`/categories/${event.target.value}/reviews`);
       }
     } else {
       if (event.target.value === "") {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate(`/reviews?sort_by=${queries.sortBy}&order=${queries.order}`);
       } else {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate(
           `/categories/${event.target.value}/reviews?sort_by=${queries.sortBy}&order=${queries.order}`
         );
@@ -32,16 +44,28 @@ const QueriesFormReview = ({ queries, categories }) => {
   const sortbyHandleChange = (event) => {
     if (queries.order === "desc" && event.target.value === "created_at") {
       if (queries.category === "") {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate("/reviews");
       } else {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate(`/categories/${event.target.value}/reviews`);
       }
     } else {
       if (queries.category === "") {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate(
           `/reviews?sort_by=${event.target.value}&order=${queries.order}`
         );
       } else {
+        setQueries((currentQueries) => {
+          return { ...currentQueries, page: 1 };
+        });
         navigate(
           `/categories/${queries.category}/reviews?sort_by=${event.target.value}&order=${queries.order}`
         );
