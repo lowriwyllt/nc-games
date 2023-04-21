@@ -80,7 +80,7 @@ const CommentCard = ({
           >
             <div className="pixelized--heart"></div>
           </button>
-          {comment.author === currentUser ? (
+          {comment.author === currentUser.username ? (
             <button onClick={deleteHandleOnClick}>Delete</button>
           ) : null}
           {err ? <p>{err}</p> : null}
