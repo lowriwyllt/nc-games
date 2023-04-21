@@ -102,16 +102,18 @@ const ReviewsList = ({
             })}
           </div>
           {/* Pages for when I add multiple pages */}
-          <p>Pages</p>
-          {pagesArr.map((pageNum) => (
-            <p
-              key={pageNum}
-              onClick={pageHandleOnClick}
-              className={pageNum == queries.page ? "green" : ""}
-            >
-              {pageNum}
-            </p>
-          ))}
+          <p className="centeredText">Pages</p>
+          <div className="pages">
+            {pagesArr.map((pageNum) => (
+              <button
+                key={pageNum}
+                onClick={pageHandleOnClick}
+                className={pageNum == queries.page ? "green" : ""}
+              >
+                {pageNum}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </section>

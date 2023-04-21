@@ -252,6 +252,10 @@ button:disabled {
   border-radius: 15px;
 }
 
+.centeredText {
+  text-align: center;
+}
+
 .modal .closeModal {
   height: 40px;
   width: 40px;
@@ -291,6 +295,11 @@ select {
 
 .reviewCards .reviewCard:hover {
   border: 8px double var(--brightGreen);
+}
+
+.pages {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 @media only screen and (min-width: 768px) {
