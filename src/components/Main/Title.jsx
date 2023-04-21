@@ -5,7 +5,7 @@ const Title = ({ setActiveNavbar }) => {
     setActiveNavbar(false);
   };
   return (
-    <Link to="/">
+    <Link to="/reviews">
       <h1 onClick={handleOnClick}>NC Games</h1>
     </Link>
   );

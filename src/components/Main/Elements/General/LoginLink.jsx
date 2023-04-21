@@ -16,7 +16,11 @@ const LoginLink = ({ setActiveNavbar }) => {
           <b>{currentUser.name}</b>
         </p>
         <p id="UserUserName">{currentUser.username}</p>
-        <img id="UserAvatar" src={currentUser.avatar_url} />
+        <img
+          id="UserAvatar"
+          src={currentUser.avatar_url}
+          alt={`${currentUser.username}'s Avatar`}
+        />
       </Link>
     );
   } else {

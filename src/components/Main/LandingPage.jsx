@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ActiveNavbarContext } from "../../contexts/ActiveNavbar";
-import Title from "./Title";
 
 const LandingPage = () => {
   //Props and context
@@ -30,7 +29,7 @@ const LandingPage = () => {
 
   return (
     <main className="centerGame">
-      <Title setActiveNavbar={setActiveNavbar} />
+      <h1>NC Games</h1>
       <form id="gameLandingForm">
         <label htmlFor="continue">
           Welcome to NC Games​ <br /> Would you like to continue to the rest of

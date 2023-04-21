@@ -214,6 +214,10 @@ header {
   width: 70%;
 }
 
+.account {
+  width: 30%;
+}
+
 button {
   font-family: "Roboto Mono", monospace;
   color: #ffffff;
@@ -267,13 +271,13 @@ select {
   margin: 5px 2px;
 }
 
-.reviewCards .reviewCard img {
+.reviewCards .reviewCard .reviewImg {
   width: 90%;
   display: block;
   margin: 10px auto;
 }
 
-.singleReview .reviewCard img {
+.singleReview .reviewCard .reviewImg {
   width: min(90%, 400px);
 }
 

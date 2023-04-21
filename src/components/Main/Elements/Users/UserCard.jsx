@@ -11,7 +11,11 @@ const UserCard = ({ user }) => {
   };
   return (
     <div className="account">
-      <img className="UserAvatarAccount" src={user.avatar_url} />
+      <img
+        className="UserAvatarAccount"
+        src={user.avatar_url}
+        alt={`${currentUser.username}'s Avatar`}
+      />
       <p>
         <b>{user.name}</b>
       </p>

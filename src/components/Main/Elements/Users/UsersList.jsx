@@ -1,22 +1,15 @@
-import { useContext, useEffect, useState } from "react";
-import * as api from "../../../../api";
+import { useContext } from "react";
 
 import UserCard from "./UserCard";
-import { CurrentUserContext } from "../../../../contexts/CurrentUser";
+import { AllUsersContext } from "../../../../contexts/AllUsers";
 
 const UsersList = () => {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    api.fetchUsers().then((users) => {
-      setUsers(users);
-    });
-  }, []);
+  const { allUsers } = useContext(AllUsersContext);
 
   return (
     <div className="userList">
-      {users.map((user) => (
-        <UserCard user={user} />
+      {allUsers.map((user) => (
+        <UserCard key={user.username} user={user} />
       ))}
     </div>
   );

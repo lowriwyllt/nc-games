@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ActiveNavbarProvider } from "./contexts/ActiveNavbar";
 import { CurrentUserProvider } from "./contexts/CurrentUser";
+import { AllUsersProvider } from "./contexts/AllUsers";
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -13,7 +14,9 @@ root.render(
   <BrowserRouter>
     <CurrentUserProvider>
       <ActiveNavbarProvider>
-        <App />
+        <AllUsersProvider>
+          <App />
+        </AllUsersProvider>
       </ActiveNavbarProvider>
     </CurrentUserProvider>
   </BrowserRouter>
