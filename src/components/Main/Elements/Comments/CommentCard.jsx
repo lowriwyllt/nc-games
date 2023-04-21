@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import * as api from "../../../../api";
 import { CurrentUserContext } from "../../../../contexts/CurrentUser";
 import MyModal from "../General/Modal";
+import PixelLoader from "../General/PixelLoader";
 
 const CommentCard = ({
   comment,
@@ -13,6 +14,7 @@ const CommentCard = ({
   const { currentUser } = useContext(CurrentUserContext);
   const [addedVotes, setAddedVotes] = useState(0);
   const [err, setErr] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Makes date readable
   const date = new Date(comment.created_at).toLocaleString();
@@ -30,11 +32,9 @@ const CommentCard = ({
 
   const deleteHandleOnClick = () => {
     setErr(null);
+    setIsLoading(true);
     api
       .deleteComment(comment.comment_id)
-      .then(() => {
-        setIsOpenDELETE(true);
-      })
       .then(() => {
         //takes the value of total comment on review down by one
         setCurrReview((nowCurrReview) => {
@@ -47,36 +47,45 @@ const CommentCard = ({
       })
       .then(() => {
         //Then set the array of comments to not include the one that we just deleted
+        setIsOpenDELETE(true);
         setComments((currentCommentsArr) => {
           return currentCommentsArr.filter(
             (currCommentObj) => currCommentObj.comment_id !== comment.comment_id
           );
         });
+        setIsLoading(false);
       })
       .catch((error) => {
         setErr("something went wrong, try again later");
+        setIsLoading(false);
       });
   };
 
   return (
     <div className="commentCard">
-      <p>
-        <i>{comment.author}</i> commented at {date}
-      </p>
-      <br />
-      <p>{comment.body}</p>
-      <p>Votes: {comment.votes + addedVotes}</p>
-      <button
-        className="pixel-block"
-        onClick={votesHandleOnClick}
-        disabled={addedVotes === 1}
-      >
-        <div className="pixelized--heart"></div>
-      </button>
-      {comment.author === currentUser ? (
-        <button onClick={deleteHandleOnClick}>Delete</button>
-      ) : null}
-      {err ? <p>{err}</p> : null}
+      {isLoading ? (
+        <PixelLoader />
+      ) : (
+        <>
+          <p>
+            <i>{comment.author}</i> commented at {date}
+          </p>
+          <br />
+          <p>{comment.body}</p>
+          <p>Votes: {comment.votes + addedVotes}</p>
+          <button
+            className="pixel-block"
+            onClick={votesHandleOnClick}
+            disabled={addedVotes === 1}
+          >
+            <div className="pixelized--heart"></div>
+          </button>
+          {comment.author === currentUser ? (
+            <button onClick={deleteHandleOnClick}>Delete</button>
+          ) : null}
+          {err ? <p>{err}</p> : null}
+        </>
+      )}
     </div>
   );
 };
