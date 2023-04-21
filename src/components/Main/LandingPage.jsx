@@ -11,17 +11,14 @@ const LandingPage = () => {
   //handles when someone types in "y" or "n"
   let navigate = useNavigate();
   const handleOnChange = (event) => {
-    console.dir(event);
     if (event.nativeEvent.data) {
       if (event.nativeEvent.data.toLowerCase() === "y") {
-        console.log("Im a 'y'");
         setContinueValue("... yes");
         setTimeout(() => {
           navigate("/reviews");
         }, 750);
         setActiveNavbar(false);
       } else if (event.nativeEvent.data.toLowerCase() === "n") {
-        console.log("Im a 'n'");
         setContinueValue("... no");
         setTimeout(() => {
           navigate("/noEntry");

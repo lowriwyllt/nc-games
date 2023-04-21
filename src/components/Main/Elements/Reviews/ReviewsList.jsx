@@ -11,14 +11,18 @@ const ReviewsList = ({
   isLoading,
   setIsLoading,
   queries,
+  setErr,
+  setQueries,
 }) => {
   //State and Contexts
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
+
   // const [pageCount, setPageCount] = useState(10); will be needed when I add pages
 
   //gets data about categories and reviews
   useEffect(() => {
+    setErr(null);
     setIsLoading(true);
     api
       .fetchCategories()
@@ -38,7 +42,25 @@ const ReviewsList = ({
             setReviews(data.reviews);
             setTotalCount(data.total_count);
             setIsLoading(false);
+          })
+          .catch((CurrErr) => {
+            setQueries({
+              ...queries,
+              category: "",
+            });
+            setIsLoading(false);
+            setErr({
+              errCode: CurrErr.response.status,
+              errMsg: CurrErr.response.data.msg,
+            });
           });
+      })
+      .catch((CurrErr) => {
+        setIsLoading(false);
+        setErr({
+          errCode: CurrErr.response.status,
+          errMsg: CurrErr.response.data.msg,
+        });
       });
   }, [queries]);
 
