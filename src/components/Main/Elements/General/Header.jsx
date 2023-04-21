@@ -5,6 +5,7 @@ import { ActiveNavbarContext } from "../../../../contexts/ActiveNavbar";
 
 const Header = () => {
   const { setActiveNavbar } = useContext(ActiveNavbarContext);
+
   return (
     <header>
       <Title setActiveNavbar={setActiveNavbar} />
