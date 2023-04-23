@@ -23,9 +23,11 @@ const Reviews = ({
       ...queries,
       category: category_slug ? category_slug : "",
       order: searchParams.get("order") ? searchParams.get("order") : "desc",
-      sortBy: searchParams.get("sort_by")
+      sort_by: searchParams.get("sort_by")
         ? searchParams.get("sort_by")
         : "created_at",
+      page: searchParams.get("page") ? searchParams.get("page") : 1,
+      limit: searchParams.get("limit") ? searchParams.get("limit") : 10,
     });
   }, [category_slug, searchParams]);
 

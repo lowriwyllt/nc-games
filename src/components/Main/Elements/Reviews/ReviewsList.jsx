@@ -32,7 +32,7 @@ const ReviewsList = ({
         api
           .fetchReviews(
             queries.category,
-            queries.sortBy,
+            queries.sort_by,
             queries.order,
             queries.limit,
             queries.page
@@ -48,7 +48,7 @@ const ReviewsList = ({
               ...queries,
               category: "",
               order: "desc",
-              sortBy: "created_at",
+              sort_by: "created_at",
             });
             setIsLoading(false);
             setErr({
