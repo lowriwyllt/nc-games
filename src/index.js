@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ActiveNavbarProvider } from "./contexts/ActiveNavbar";
 import { CurrentUserProvider } from "./contexts/CurrentUser";
 import { AllUsersProvider } from "./contexts/AllUsers";
+import { CurrentPathProvider } from "./contexts/CurrentPath";
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -14,9 +15,11 @@ root.render(
   <BrowserRouter>
     <CurrentUserProvider>
       <ActiveNavbarProvider>
-        <AllUsersProvider>
-          <App />
-        </AllUsersProvider>
+        <CurrentPathProvider>
+          <AllUsersProvider>
+            <App />
+          </AllUsersProvider>
+        </CurrentPathProvider>
       </ActiveNavbarProvider>
     </CurrentUserProvider>
   </BrowserRouter>

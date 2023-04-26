@@ -1,9 +1,11 @@
 import * as api from "../../../../api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import PixelLoader from "../General/PixelLoader";
 import QueriesFormReview from "./QueriesFormReview";
+import queryAdder from "../../../queryAdder";
+import { CurrentPathContext } from "../../../../contexts/CurrentPath";
 
 const ReviewsList = ({
   categories,
@@ -17,8 +19,8 @@ const ReviewsList = ({
   //State and Contexts
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
-
-  // const [pageCount, setPageCount] = useState(10); will be needed when I add pages
+  const [pageCount, setPageCount] = useState(0);
+  const { currentPath } = useContext(CurrentPathContext);
 
   //gets data about categories and reviews
   useEffect(() => {
@@ -33,7 +35,7 @@ const ReviewsList = ({
         api
           .fetchReviews(
             queries.category,
-            queries.sortBy,
+            queries.sort_by,
             queries.order,
             queries.limit,
             queries.page
@@ -41,6 +43,7 @@ const ReviewsList = ({
           .then((data) => {
             setReviews(data.reviews);
             setTotalCount(data.total_count);
+            setPageCount(Math.ceil(data.total_count / queries.limit));
             setIsLoading(false);
           })
           .catch((CurrErr) => {
@@ -48,7 +51,7 @@ const ReviewsList = ({
               ...queries,
               category: "",
               order: "desc",
-              sortBy: "created_at",
+              sort_by: "created_at",
             });
             setIsLoading(false);
             setErr({
@@ -66,15 +69,46 @@ const ReviewsList = ({
       });
   }, [queries]);
 
+  const pagesArr = Array.from({ length: pageCount }, (_, i) => i + 1);
+
+  const defaultQuery = {
+    category: "",
+    order: "desc",
+    sort_by: "created_at",
+    limit: 10,
+    page: 1,
+  };
+
+  let navigate = useNavigate();
+
+  const pageHandleOnClick = (event) => {
+    const { newUrl } = queryAdder(
+      currentPath,
+      { ...queries, page: event.target.innerText },
+      defaultQuery
+    );
+    navigate(newUrl);
+    // setQueries((currentQueries) => {
+    //   return { ...currentQueries, page: event.target.innerText };
+    // });
+  };
+
   return (
     <section id="reviewList">
-      <QueriesFormReview queries={queries} categories={categories} />
+      <QueriesFormReview
+        queries={queries}
+        categories={categories}
+        setQueries={setQueries}
+      />
       {isLoading ? (
         //if loading show loader
         <PixelLoader loadingMessage={"Loading..."} />
       ) : (
         //adds all reviews in a different card each
         <div>
+          <p>
+            Seeing {reviews.length} of {totalCount} reviews
+          </p>
           <div className="reviewCards">
             {reviews.map((review) => {
               return (
@@ -86,9 +120,18 @@ const ReviewsList = ({
               );
             })}
           </div>
-          {/* Pages for when I add multiple pages */}
-          <p>Pages</p>
-          <p>Page numbers will go here</p>
+          <p className="centeredText">Pages</p>
+          <div className="pages">
+            {pagesArr.map((pageNum) => (
+              <button
+                key={pageNum}
+                onClick={pageHandleOnClick}
+                className={pageNum == queries.page ? "green" : ""}
+              >
+                {pageNum}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </section>

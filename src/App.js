@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar/Navbar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import LandingPage from "./components/Main/LandingPage";
 import NoEntry from "./components/Main/NoEntry";
 import Reviews from "./components/Main/Pages/Reviews";
@@ -10,6 +10,7 @@ import SingleReview from "./components/Main/Pages/SingleReview";
 import { ActiveNavbarContext } from "./contexts/ActiveNavbar";
 import ErrorPage from "./components/Main/ErrorPage";
 import Account from "./components/Main/Pages/Account";
+import { CurrentPathContext } from "./contexts/CurrentPath";
 
 function App() {
   //Props and context
@@ -19,8 +20,16 @@ function App() {
   const [reviewQueries, setReviewQueries] = useState({
     category: "",
     order: "desc",
-    sortBy: "created_at",
+    sort_by: "created_at",
+    limit: 10,
+    page: 1,
   });
+  const { setCurrentPath } = useContext(CurrentPathContext);
+
+  const location = useLocation();
+  useEffect(() => {
+    setCurrentPath(location);
+  }, [location]);
 
   return (
     <div className={activeNavbar ? "App AppNav" : "App"}>
