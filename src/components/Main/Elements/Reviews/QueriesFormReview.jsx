@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CurrentPathContext } from "../../../../contexts/CurrentPath";
-import { queryAdder } from "../../../QueryAdder";
+import queryAdder from "../../../queryAdder";
 
 const QueriesFormReview = ({ queries, categories, setQueries }) => {
   const { currentPath } = useContext(CurrentPathContext);

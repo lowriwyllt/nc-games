@@ -1,9 +1,11 @@
 import * as api from "../../../../api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import PixelLoader from "../General/PixelLoader";
 import QueriesFormReview from "./QueriesFormReview";
+import queryAdder from "../../../queryAdder";
+import { CurrentPathContext } from "../../../../contexts/CurrentPath";
 
 const ReviewsList = ({
   categories,
@@ -17,7 +19,8 @@ const ReviewsList = ({
   //State and Contexts
   const [reviews, setReviews] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
-  const [pageCount, setPageCount] = useState(0); //will be needed when I add pages
+  const [pageCount, setPageCount] = useState(0);
+  const { currentPath } = useContext(CurrentPathContext);
 
   //gets data about categories and reviews
   useEffect(() => {
@@ -68,10 +71,26 @@ const ReviewsList = ({
 
   const pagesArr = Array.from({ length: pageCount }, (_, i) => i + 1);
 
+  const defaultQuery = {
+    category: "",
+    order: "desc",
+    sort_by: "created_at",
+    limit: 10,
+    page: 1,
+  };
+
+  let navigate = useNavigate();
+
   const pageHandleOnClick = (event) => {
-    setQueries((currentQueries) => {
-      return { ...currentQueries, page: event.target.innerText };
-    });
+    const { newUrl } = queryAdder(
+      currentPath,
+      { ...queries, page: event.target.innerText },
+      defaultQuery
+    );
+    navigate(newUrl);
+    // setQueries((currentQueries) => {
+    //   return { ...currentQueries, page: event.target.innerText };
+    // });
   };
 
   return (
@@ -101,7 +120,6 @@ const ReviewsList = ({
               );
             })}
           </div>
-          {/* Pages for when I add multiple pages */}
           <p className="centeredText">Pages</p>
           <div className="pages">
             {pagesArr.map((pageNum) => (

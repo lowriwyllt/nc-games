@@ -15,7 +15,7 @@
 //   page: 1,
 // };
 
-exports.queryAdder = (location, newQueryObj, defaultQueries) => {
+const queryAdder = (location, newQueryObj, defaultQueries) => {
   //gets an object of all the queries
   const queriesArr = location.search.slice(1).split("&"); //e.g. [ 'sort_by=comment_count', 'order=asc' ]
   const ArrayOfQueries = queriesArr.map((query) => query.split("=")); //e.g.[ [ 'sort_by', 'comment_count' ], [ 'order', 'asc' ] ]
@@ -47,3 +47,5 @@ exports.queryAdder = (location, newQueryObj, defaultQueries) => {
 };
 
 // queryAdder(testLocation, newQueryObj, testDefautQueries);
+
+export default queryAdder;
