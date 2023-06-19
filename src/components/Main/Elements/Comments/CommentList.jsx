@@ -7,6 +7,7 @@ const CommentList = ({
   setComments,
   setCurrReview,
   setIsOpenDELETE,
+  totalComments,
 }) => {
   return (
     <div className="commentCards">
