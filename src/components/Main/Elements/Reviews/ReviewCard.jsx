@@ -113,6 +113,7 @@ const ReviewCard = ({ review, space }) => {
               reviewId={currReview.review_id}
               space={space}
               setCurrReview={setCurrReview}
+              totalComments={currReview.comment_count}
             />
           ) : null}
         </>

@@ -1,20 +1,3 @@
-// const testUrl = "http://localhost:3000/reviews?sort_by=comment_count&order=asc";
-// const newQueryObj = {};
-// const testLocation = {
-//   pathname: "/reviews",
-//   search: "?sort_by=comment_count&order=desc",
-//   hash: "",
-//   state: null,
-//   key: "nd94uxbp",
-// };
-// const testDefautQueries = {
-//   category: "",
-//   order: "desc",
-//   sort_by: "created_at",
-//   limit: 10,
-//   page: 1,
-// };
-
 const queryAdder = (location, newQueryObj, defaultQueries) => {
   //gets an object of all the queries
   const queriesArr = location.search.slice(1).split("&"); //e.g. [ 'sort_by=comment_count', 'order=asc' ]
@@ -45,7 +28,5 @@ const queryAdder = (location, newQueryObj, defaultQueries) => {
   const newUrl = location.pathname + queryStr;
   return { newUrl, queryStr };
 };
-
-// queryAdder(testLocation, newQueryObj, testDefautQueries);
 
 export default queryAdder;
